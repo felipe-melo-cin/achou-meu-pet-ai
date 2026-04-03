@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 import dotenv
-import interface
+import backend.api.interface as interface
 
 # Carrega as variáveis de ambiente
 dotenv.load_dotenv()
