@@ -23,17 +23,31 @@ Diferente de fóruns comuns, nossa aplicação automatiza a descrição e a busc
 
 ```bash
 /achou-meu-pet-ai
-├── /frontend              # Projeto React/Next.js (2 Devs)
-│   ├── /src/components    # UI: Inserção de foto, Cards de Match, etc.
-│   ├── /src/pages         # Home, Pesquisar, Cadastrar
-│   └── tailwind.config.js
-├── /backend               # Projeto Python/FastAPI ou Node.js (3 Devs)
-│   ├── /api               # Rotas (upload, search, match)
-│   ├── /services          # Integração OpenRouter (Vision) e Embeddings
-│   ├── /database          # Queries Supabase (Cosine Similarity)
-│   └── main.py
-├── /docs                  # Documento de Visão, Diagramas, CONTRIBUTING
+├── /frontend              # Flet
+│   ├── /screens     	   # Páginas (Home, Pesquisar, Cadastrar)
+│   ├── /componentes	   # Widgets reutilizáveis
+│   ├── theme.py     	   # Temas, cores, constantes de UI
+│	├── router.py          # Navegação entre as telas
+│	└── __init__.py
+│
+├── /backend			   # Funções Python
+│   ├── /ai	
+│	│	├── __init__.py  
+│   │	├── config.py 	   # Configs OpenRouter
+│   │	├── base.py	       # O BaseModel
+│	│	├── embeddings.py  # ImageUrlToVectorModel
+│   │   ├── vision.py      # Análise de imagem
+│	│	└── pipeline.py    # Orquestra vision + embeddings
+│   └── /database
+│		├── __init__.py    
+│		├── client.py      # Cliente Supabase
+│		├── queries.py     # Querys do BD
+│		├── storage.py     # Gerenciar armazenamento
+│		└── models.py	   # Schemas/tipos 
+│
+├── main.py                # Ponto de entrada (Roda o App Flet)
 ├── docker-compose.yml     # Orquestração de ambiente local
+├── CONTRIBUTING.md		   # Documento de contribuição no projeto
 └── README.md              # Visão geral do projeto
 ```
 ---
@@ -107,4 +121,4 @@ O projeto é desenvolvido por uma equipe de 6 integrantes, com papéis rotativos
 
 ## 📄 Documentação Adicional
 
-- [Guia de Contribuição (CONTRIBUTING.md)](docs/CONTRIBUTING.md) - Padrões de código e branches.
+- [Guia de Contribuição (CONTRIBUTING.md)](CONTRIBUTING.md) - Padrões de código e branches.
