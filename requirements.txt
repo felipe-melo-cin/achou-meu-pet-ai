@@ -1,1 +1,5 @@
 flet
+python-dotenv
+google-generativeai
+anthropic
+requests
