@@ -45,8 +45,7 @@ def tela_inicial(page: ft.Page):
                 ft.Container(height=30),
                 ft.Row([
                     ft.FilledButton("Procurar meu Pet", bgcolor="#7DD2A8", height=45, on_click=abrir_procurar),
-                    ft.FilledButton("Cadastrar um Pet", bgcolor="#7DD2A8", height=45, on_click=abrir_cadastro),
-                    ft.FilledButton("Procurar meu Pet", bgcolor="#7DD2A8", height=45),
+                    
                     ft.FilledButton(
                         "Cadastrar um Pet",
                         bgcolor="#7DD2A8",
