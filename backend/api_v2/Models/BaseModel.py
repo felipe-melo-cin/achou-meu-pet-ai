@@ -1,11 +1,10 @@
 print("Importing BaseModel...")
 
-from abc import ABC, abstractmethod
 from openai import OpenAI
 import os
 import dotenv
 
-class BaseModel(ABC):
+class BaseModel:
 
     def __init__(self, model: str) -> None:
 
@@ -21,8 +20,3 @@ class BaseModel(ABC):
             base_url="https://openrouter.ai/api/v1",
             api_key=self.API_KEY,
         )
-
-    @abstractmethod
-    def make_request(self, request: str | list[str], single_request: bool = True)\
-            -> list[float] | list[list[float] | None] | None:
-        pass
