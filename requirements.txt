@@ -3,3 +3,8 @@ python-dotenv
 google-generativeai
 anthropic
 requests
+supabase
+pydantic
+python-dotenv
+python-multipart
+uvicorn
