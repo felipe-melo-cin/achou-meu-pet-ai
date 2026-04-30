@@ -52,3 +52,13 @@ def gerar_link_temporario(caminho_no_storage: str):
         return res["signedURL"]
     
     return res
+
+def atualizar_dados_pet(caminho_no_storage: str, descricao_json: dict, pet_vector: list):
+    """Atualiza o registro do pet com o vetor gerado e os dados da IA de visão"""
+    try:
+        return supabase.table("pets").update({
+            "descricao_json": descricao_json,
+            "pet_vector": pet_vector
+        }).eq("foto_caminho", caminho_no_storage).execute()
+    except Exception as e:
+        raise RuntimeError(f"Falha ao atualizar dados do pet: {str(e)}")

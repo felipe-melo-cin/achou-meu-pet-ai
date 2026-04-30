@@ -15,7 +15,7 @@ def tela_post_animal(page: ft.Page):
 
     # VOLTAR PARA MATCHES
     def voltar(e):
-        from screens.matches import tela_matches
+        from frontend.screens.matches import tela_matches
         tela_matches(page)
 
         # =========================

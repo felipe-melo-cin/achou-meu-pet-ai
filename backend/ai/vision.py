@@ -75,41 +75,6 @@ class BaseVisionModel(ABC):
 
 
 # ============================================================================
-# IMPLEMENTAÇÃO DO GEMINI VISION
-# ============================================================================
-
-class GeminiVisionModel(BaseVisionModel):
-    def __init__(self, model: str = ModelConfig.GEMINI_VISION.value):
-        super().__init__(model, APIProvider.GEMINI)
-    
-    def analyze_pet_image(self, image_input: str) -> Dict[str, Any]:
-        prompt = self._build_analysis_prompt()
-        
-        try:
-            if self._is_url(image_input):
-                resp = requests.get(image_input)
-                resp.raise_for_status()
-                image_data = resp.content
-                mime_type = resp.headers.get('Content-Type', 'image/jpeg')
-            else:
-                image_data = Path(image_input).read_bytes()
-                mime_type = self._get_mime_type(image_input)
-            
-            # Formato exigido pela SDK do Gemini
-            model = self.client.GenerativeModel(self.model)
-            response = model.generate_content([
-                prompt,
-                {
-                    "mime_type": mime_type,
-                    "data": image_data
-                }
-            ])
-            
-            return self._parse_json_response(response.text)
-        except Exception as e:
-            raise RuntimeError(f"Erro Gemini: {str(e)}")    
-
-# ============================================================================
 # IMPLEMENTAÇÃO DO OPENROUTER VISION
 # ============================================================================
 
@@ -174,9 +139,6 @@ class VisionModel(BaseVisionModel):
         super().__init__(model, provider)
     
     def analyze_pet_image(self, image_input: str) -> Dict[str, Any]:
-        if self.provider == APIProvider.GEMINI:
-            vision = GeminiVisionModel(self.model)
-        else:
-            vision = OpenRouterVisionModel(self.model)
+        vision = OpenRouterVisionModel(self.model)
         
         return vision.analyze_pet_image(image_input)

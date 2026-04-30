@@ -6,11 +6,11 @@ def tela_inicial(page: ft.Page):
 
     #  navegação
     def abrir_cadastro(e):
-        from screens.tela_cadastro import tela_cadastro
+        from frontend.screens.tela_cadastro import tela_cadastro
         tela_cadastro(page)
     
     def abrir_procurar(a):
-        from screens.tela_busca import tela_busca
+        from frontend.screens.tela_busca import tela_busca
         tela_busca(page)
 
     #  BOTÃO LOGIN
