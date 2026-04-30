@@ -4,8 +4,8 @@ import flet as ft
 def tela_matches(page: ft.Page):
 
     def abrir_post(e):
-
-        from frontend.screens.tela_post_animal import tela_post_animal
+        
+        from screens.tela_post_animal import tela_post_animal
         tela_post_animal(page)
 
     def criar_card(nome, tempo):

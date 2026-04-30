@@ -13,12 +13,12 @@ def tela_post_animal(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.START
     page.horizontal_alignment = ft.CrossAxisAlignment.START
 
-    # VOLTAR
+    # VOLTAR PARA MATCHES
     def voltar(e):
-        from telas.matches import tela_matches
+        from screens.matches import tela_matches
         tela_matches(page)
 
-    # =========================
+        # =========================
     # TOPO
     # =========================
     topo = ft.Row(
@@ -208,25 +208,21 @@ def tela_post_animal(page: ft.Page):
     # =========================
     # CARD
     # =========================
+    
     post = ft.Container(
         width=350 if mobile else 600,
         bgcolor="white",
         border_radius=20,
         padding=20,
-
         shadow=ft.BoxShadow(
             spread_radius=1,
             blur_radius=15,
             color=ft.Colors.BLACK12,
             offset=ft.Offset(0, 4),
         ),
-
         content=conteudo
     )
 
-    # =========================
-    # PAGE
-    # =========================
     page.add(
 
         ft.IconButton(

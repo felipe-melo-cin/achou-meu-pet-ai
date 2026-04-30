@@ -6,11 +6,11 @@ def tela_inicial(page: ft.Page):
 
     #  navegação
     def abrir_cadastro(e):
-        from telas.tela_cadastro import tela_cadastro
+        from screens.tela_cadastro import tela_cadastro
         tela_cadastro(page)
     
     def abrir_procurar(a):
-        from telas.tela_busca import tela_busca
+        from screens.tela_busca import tela_busca
         tela_busca(page)
 
     #  BOTÃO LOGIN
@@ -45,7 +45,6 @@ def tela_inicial(page: ft.Page):
                 ft.Container(height=30),
                 ft.Row([
                     ft.FilledButton("Procurar meu Pet", bgcolor="#7DD2A8", height=45, on_click=abrir_procurar),
-                    
                     ft.FilledButton(
                         "Cadastrar um Pet",
                         bgcolor="#7DD2A8",
