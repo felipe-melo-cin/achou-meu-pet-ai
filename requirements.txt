@@ -1,4 +1,8 @@
 flet
+python-dotenv
+google-generativeai
+anthropic
+requests
 supabase
 pydantic
 python-dotenv
