@@ -1,1 +1,6 @@
 flet
+supabase
+pydantic
+python-dotenv
+python-multipart
+uvicorn
