@@ -1,20 +1,25 @@
 import flet as ft
 
-def tela_cadastro(page: ft.Page):
+def tela_busca(page: ft.Page):
     page.clean()
     page.scroll = ft.ScrollMode.AUTO
 
-    # 🔥 função correta (AGORA TEM ACESSO AO PAGE)
-    def ir_para_matches(e):
-        from telas.matches import tela_matches
-        tela_matches(page)
+    def ir_para_agradecimentos(e):
+        # 1. Importa a função da tela de agradecimento
+        from screens.agradecimento import tela_agradecimento
+        # 2. Importa a função da tela inicial (ajuste o caminho se o nome da pasta/arquivo for outro)
+        # Exemplo: se o arquivo tela_inicial.py estiver na mesma pasta 'telas':
+        from screens.tela_inicial import tela_inicial 
+        # 3. Chama a função passando a referência da tela inicial
+        tela_agradecimento(page, tela_inicial)
 
+        
     # INPUTS
     cidade = ft.TextField(label="Cidade", bgcolor="#E8F3EC", border_radius=10, expand=True)
     animal = ft.TextField(label="Animal", bgcolor="#E8F3EC", border_radius=10, expand=True)
     sexo = ft.TextField(label="Sexo", bgcolor="#E8F3EC", border_radius=10, expand=True)
 
-    data = ft.TextField(label="Data", bgcolor="#E8F3EC", border_radius=10, expand=True)
+    data = ft.TextField(label="Data do desaparecimento", bgcolor="#E8F3EC", border_radius=10, expand=True)
     local = ft.TextField(label="Local exato", bgcolor="#E8F3EC", border_radius=10, expand=True)
     horario = ft.TextField(label="Horário", bgcolor="#E8F3EC", border_radius=10, expand=True)
 
@@ -28,7 +33,7 @@ def tela_cadastro(page: ft.Page):
     )
 
     def voltar(e):
-        from telas.tela_inicial import tela_inicial
+        from screens.tela_inicial import tela_inicial
         tela_inicial(page)
 
     # LADO ESQUERDO
@@ -42,7 +47,7 @@ def tela_cadastro(page: ft.Page):
             controls=[
                 ft.IconButton(icon=ft.Icons.ARROW_BACK, on_click=voltar),
                 ft.Text(
-                    "Adicione o pet ao sistema com imagens e uma breve descrição clara, para que nossa IA realize matches com futuros tutores.",
+                    "Envie uma foto do pet, juntamente com uma descrição objetiva do animal e nossa IA irá comparar com imagens já cadastradas para encontrar possíveis correspondências.",
                     size=16,
                     text_align=ft.TextAlign.CENTER
                 ),
@@ -73,7 +78,7 @@ def tela_cadastro(page: ft.Page):
                     bgcolor="#2F5D62",
                     color="white",
                     width=float("inf"),
-                    on_click=ir_para_matches  # ✅ agora funciona
+                    on_click=ir_para_agradecimentos  # ✅ agora funciona
                 )
             ]
         )
@@ -90,7 +95,7 @@ def tela_cadastro(page: ft.Page):
                             "Cadastrar",
                             bgcolor="#2F5D62",
                             color="white",
-                            on_click=ir_para_matches  # ✅ aqui também
+                            on_click=ir_para_agradecimentos  # ✅ aqui também
                         )
                     ]
                 )

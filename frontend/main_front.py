@@ -1,6 +1,6 @@
 # verificar integração do main.py (front e back)
 import flet as ft
-from telas.tela_inicial import tela_inicial
+from screens.tela_inicial import tela_inicial
 
 def main(page: ft.Page):
     
