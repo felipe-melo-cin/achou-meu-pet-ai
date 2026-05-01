@@ -124,7 +124,7 @@ def tela_cadastro(page: ft.Page):
                     text_align=ft.TextAlign.CENTER
                 ),
                 ft.Image(
-                    src="pata.png",
+                    src="frontend/assets/pata.png",
                     width=50,
                     height=50,
                     fit="contain"

@@ -28,7 +28,7 @@ def tela_inicial(page: ft.Page):
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         vertical_alignment=ft.CrossAxisAlignment.CENTER,
         controls=[
-            ft.Image(src="lupa.png", width=50),
+            ft.Image(src="frontend/assets/lupa.png", width=50),
             btn_login
         ]
     )
@@ -54,7 +54,7 @@ def tela_inicial(page: ft.Page):
                 ], spacing=20),
             ]),
             ft.Column(col={"sm": 12, "md": 6}, controls=[
-                ft.Image(src="pets_ilustracao.png", width=300)
+                ft.Image(src="frontend/assets/pets_ilustracao.png", width=300)
             ])
         ]
     )

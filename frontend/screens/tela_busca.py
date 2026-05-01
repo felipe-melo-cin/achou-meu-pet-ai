@@ -27,7 +27,7 @@ def tela_busca(page: ft.Page):
     texto_imagem = ft.Text("Nenhuma imagem selecionada", color="red")
 
     # FILE PICKER - adicionar ao overlay ANTES de usar
-    def on_image_selected(e: ft.FilePickerResultEvent):
+    async def on_image_selected(e: ft.FilePickerResultEvent):
         if e.files and len(e.files) > 0:
             estado_tela["caminho_imagem"] = e.files[0].path
             texto_imagem.value = f"✓ Imagem selecionada: {e.files[0].name}"
@@ -120,7 +120,7 @@ def tela_busca(page: ft.Page):
                     text_align=ft.TextAlign.CENTER
                 ),
                 ft.Image(
-                    src="pata.png",
+                    src="frontend/assets/pata.png",
                     width=50,
                     height=50,
                     fit="contain"
