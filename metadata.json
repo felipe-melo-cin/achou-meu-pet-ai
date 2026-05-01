@@ -1,0 +1,12 @@
+{
+  "name": "Achou Meu Pet AI",
+  "description": "Uma plataforma inteligente para reencontrar animais perdidos usando IA para reconhecimento visual e busca vetorial.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "AI Vision",
+    "Vector Search",
+    "Image Storage"
+  ]
+}
