@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achou Meu Pet AI?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ══ HOME ══ -->
+<div id="page-home" class="page active">
+  <header class="header">
+    <div class="logo-ball"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Ccircle cx='11' cy='4' r='2'/%3E%3Ccircle cx='18' cy='8' r='2'/%3E%3Ccircle cx='4' cy='8' r='2'/%3E%3Cpath d='M6 17c0-3.3 2.7-6 6-6s6 2.7 6 6v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1z'/%3E%3C/svg%3E" alt="pata"/></div>
+    <div class="header-actions">
+      <button class="btn-outline" onclick="goTo('login')">Login</button>
+      <button class="btn-outline" onclick="goTo('register-user')">Registre-se</button>
+    </div>
+  </header>
+  <main class="hero">
+    <h1 class="hero-title">Achou meu pet AI?</h1>
+    <div class="hero-btns">
+      <button class="btn-border" onclick="goTo('search')">Procurar</button>
+      <button class="btn-border" onclick="goTo('register-pet')">Cadastrar</button>
+    </div>
+    <p class="hero-sub">Use IA para encontrar seu animal perdido ou cadastrar um que você encontrou.</p>
+  </main>
+</div>
+
+<!-- ══ BUSCA ══ -->
+<div id="page-search" class="page">
+  <header class="header">
+    <div class="logo-ball"></div>
+    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
+  </header>
+  <main class="form-main">
+    <div class="form-wrap">
+      <p class="form-label">Fale sobre as características físicas, último lugar visto...</p>
+      <div class="card-form">
+        <textarea id="search-desc" placeholder="Descreva seu animal..." rows="7"></textarea>
+        <div id="search-previews" class="img-previews"></div>
+        <div class="card-footer">
+          <button class="btn-attach" onclick="document.getElementById('search-file').click()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Anexe imagens para facilitar o match
+          </button>
+          <input type="file" id="search-file" accept="image/*" multiple hidden/>
+          <button class="btn-primary" id="search-btn" onclick="handleSearch()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar
+          </button>
+        </div>
+      </div>
+      <p class="status-msg" id="search-status"></p>
+    </div>
+  </main>
+</div>
+
+<!-- ══ RESULTADOS ══ -->
+<div id="page-matches" class="page">
+  <header class="header">
+    <div class="logo-ball"></div>
+    <button class="btn-back" onclick="goTo('search')">← Voltar para busca</button>
+  </header>
+  <main class="matches-main">
+    <p class="form-label">Animais encontrados baseados em sua descrição e fotos anexadas.</p>
+    <div class="matches-row" id="matches-container"></div>
+  </main>
+</div>
+
+<!-- ══ DETALHE DO PET ══ -->
+<div id="page-detail" class="page">
+  <header class="header">
+    <div class="logo-ball"></div>
+    <button class="btn-back" onclick="goTo('matches')">← Voltar</button>
+  </header>
+  <main class="detail-main">
+    <div class="detail-card" id="detail-card"></div>
+  </main>
+</div>
+
+<!-- ══ CADASTRAR PET ══ -->
+<div id="page-register-pet" class="page">
+  <header class="header">
+    <div class="logo-ball"></div>
+    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
+  </header>
+  <main class="form-main">
+    <div class="form-wrap">
+      <p class="form-label">Fale sobre as características físicas do animal, lugar encontrado...</p>
+      <div class="card-form">
+        <div class="input-row">
+          <div class="input-group">
+            <label>Animal</label>
+            <input type="text" id="pet-animal" placeholder="Cachorro..."/>
+          </div>
+          <div class="input-group">
+            <label>Região</label>
+            <input type="text" id="pet-regiao" placeholder="Recife-PE..."/>
+          </div>
+        </div>
+        <textarea id="pet-desc" placeholder="Descreva o animal encontrado..." rows="5"></textarea>
+        <div id="pet-previews" class="img-previews"></div>
+        <div class="card-footer">
+          <button class="btn-attach" onclick="document.getElementById('pet-file').click()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Anexe imagens para facilitar o match
+          </button>
+          <input type="file" id="pet-file" accept="image/*" multiple hidden/>
+          <button class="btn-primary" id="pet-btn" onclick="handleRegisterPet()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar
+          </button>
+        </div>
+      </div>
+      <p class="status-msg" id="pet-status"></p>
+    </div>
+  </main>
+</div>
+
+<!-- ══ CADASTRO DE USUÁRIO ══ -->
+<div id="page-register-user" class="page">
+  <header class="header">
+    <div class="logo-ball"></div>
+    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
+  </header>
+  <main class="auth-main">
+    <div class="auth-layout">
+      <div class="auth-form-wrap">
+        <h2 class="auth-title">Cadastro</h2>
+        <form id="form-register" onsubmit="handleRegisterUser(event)">
+          <div class="input-row">
+            <div class="input-group">
+              <label>Nome</label>
+              <input type="text" id="reg-nome" required/>
+            </div>
+            <div class="input-group">
+              <label>Sobrenome</label>
+              <input type="text" id="reg-sobrenome" required/>
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label>Data de nascimento</label>
+              <input type="date" id="reg-data" required/>
+            </div>
+            <div class="input-group">
+              <label class="label-with-tip">
+                Telefone
+                <button type="button" class="tip-btn" onclick="toggleTooltip()">ℹ</button>
+                <div class="tooltip" id="tooltip">
+                  Os tutores que encontrar seus animais através do seu cadastro vai entrar em contato por este número de telefone.
+                </div>
+              </label>
+              <input type="tel" id="reg-tel" placeholder="(81) 99999-9999" required/>
+            </div>
+          </div>
+          <div class="input-group full">
+            <label>E-mail</label>
+            <input type="email" id="reg-email" required/>
+          </div>
+          <div class="input-group full">
+            <label>Senha</label>
+            <input type="password" id="reg-senha" required minlength="6"/>
+          </div>
+          <div class="input-group full">
+            <label>Confirme a senha</label>
+            <input type="password" id="reg-confirm" required minlength="6"/>
+          </div>
+          <p class="status-msg" id="reg-status"></p>
+          <div class="form-submit-row">
+            <button type="submit" class="btn-outline-dark" id="reg-btn">Registrar</button>
+          </div>
+        </form>
+      </div>
+      <div class="auth-tagline">
+        <h1>Achou meu<br/>pet AI?</h1>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="page-login" class="page">
+  <header class="header">
+    <div class="logo-ball"></div>
+    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
+  </header>
+  <main class="auth-main">
+    <div class="auth-layout">
+      <div class="auth-form-wrap">
+        <h2 class="auth-title">Login</h2>
+        <form id="form-login" onsubmit="handleLogin(event)">
+          <div class="input-group full">
+            <label>E-mail</label>
+            <input type="email" id="login-email" required/>
+          </div>
+          <div class="input-group full">
+            <label>Senha</label>
+            <input type="password" id="login-senha" required/>
+          </div>
+          <p class="status-msg" id="login-status"></p>
+          <div class="form-submit-row" style="justify-content:space-between; align-items:center">
+            <button type="button" class="link-btn" onclick="goTo('register-user')">Não tem conta? Registre-se</button>
+            <button type="submit" class="btn-outline-dark" id="login-btn">Entrar</button>
+          </div>
+        </form>
+      </div>
+      <div class="auth-tagline">
+        <h1>Achou meu<br/>pet AI?</h1>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
