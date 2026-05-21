@@ -1,224 +1,1006 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Achou Meu Pet AI?</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Achou meu pet AI?</title>
+  <meta name="description" content="Plataforma com IA que reconecta pets perdidos aos seus donos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       Achou meu pet AI? — Single-file build
+       ========================================================= */
+    :root {
+      --color-primary: #0b3b24;
+      --color-primary-2: #115d33;
+      --color-secondary: #79b791;
+      --color-light: #8dd06c;
+      --color-bg: #e6efe6;
+      --color-bg-soft: #f1f7f0;
+      --color-surface: #ffffff;
+      --color-muted: #6c8976;
+      --color-text: #0b3b24;
+      --color-text-soft: #355c47;
+      --color-border: #d6e4d8;
+      --color-dark: #0d2b33;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+
+      --shadow-sm: 0 2px 6px rgba(11, 59, 36, 0.06);
+      --shadow-md: 0 8px 24px rgba(11, 59, 36, 0.08);
+      --shadow-lg: 0 18px 40px rgba(11, 59, 36, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--color-text);
+      background: #fff;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .page { display: none; min-height: 100vh; flex-direction: column; background: #fff; }
+    .page.active { display: flex; }
+
+    /* ---------- Botão padrão ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; height: 48px; min-width: 160px; padding: 0 22px;
+      border-radius: 12px; font-weight: 600; font-size: 15px;
+      border: 1px solid transparent; white-space: nowrap; cursor: pointer;
+      transition: background .18s ease, transform .18s ease, box-shadow .18s ease, color .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-primary {
+      background: var(--color-secondary); color: var(--color-primary);
+      box-shadow: 0 1px 0 rgba(11,59,36,.04), 0 6px 18px -10px rgba(11,59,36,.35);
+    }
+    .btn-primary:hover { background: var(--color-light); box-shadow: 0 12px 24px -12px rgba(11,59,36,.45); }
+    .btn-dark { background: var(--color-dark); color: #fff; }
+    .btn-dark:hover { background: #0a2129; box-shadow: 0 12px 24px -12px rgba(13,43,51,.55); }
+    .btn-ghost { background: #fff; color: var(--color-primary); border-color: var(--color-border); }
+    .btn-ghost:hover { background: var(--color-bg-soft); }
+
+    /* ============== HOME ============== */
+    .home-wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 56px; flex: 1; display: flex; flex-direction: column; }
+    .home-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0 12px; }
+    .home-logo img { width: 56px; height: 56px; object-fit: contain; }
+    .home-nav { display: flex; gap: 56px; }
+    .home-nav a { color: var(--color-primary); font-weight: 500; font-size: 16px; transition: color .15s; }
+    .home-nav a:hover { color: var(--color-primary-2); }
+    .home-login {
+      background: var(--color-secondary); color: var(--color-primary);
+      border-radius: 999px; padding: 10px 28px; font-weight: 600; font-size: 15px;
+      transition: background .15s, transform .15s;
+    }
+    .home-login:hover { background: var(--color-light); transform: translateY(-1px); }
+
+    .home-hero {
+      position: relative; display: grid; grid-template-columns: 1.25fr 1fr;
+      gap: 40px; align-items: center; padding: 40px 0 28px;
+    }
+    .home-hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: url("paws-trail.png");
+      background-repeat: no-repeat; background-position: center center;
+      background-size: 92% auto; opacity: .9; pointer-events: none; z-index: 0;
+    }
+    .home-hero > * { position: relative; z-index: 1; }
+    .home-hero h1 {
+      font-size: clamp(40px, 5.6vw, 68px); font-weight: 700; color: var(--color-primary);
+      margin: 0 0 28px; letter-spacing: -0.02em; line-height: 1.05;
+    }
+    .home-hero p { color: var(--color-text-soft); font-size: 15px; margin: 0 0 26px; max-width: 420px; }
+    .home-hero p strong { color: var(--color-primary); font-weight: 700; }
+
+    .home-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .home-actions .home-btn {
+      background: var(--color-secondary); color: var(--color-primary);
+      border-radius: 12px; padding: 0 24px; height: 56px; min-width: 180px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 15px; white-space: nowrap;
+      box-shadow: 0 1px 0 rgba(11,59,36,.04), 0 6px 18px -10px rgba(11,59,36,.35);
+      transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+    .home-actions .home-btn:hover {
+      background: var(--color-light); transform: translateY(-2px);
+      box-shadow: 0 12px 24px -12px rgba(11,59,36,.45);
+    }
+    .home-actions .home-btn:active { transform: translateY(0); }
+
+    .home-art { display: grid; place-items: center; }
+    .home-art img { width: 100%; max-width: 360px; height: auto; }
+
+    .home-how { padding: 24px 0 56px; position: relative; z-index: 1; }
+    .home-how h2 { font-size: 28px; font-weight: 700; color: var(--color-primary); margin: 0 0 22px; }
+    .home-how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 900px; }
+    .home-how-item h3 { margin: 0 0 4px; font-size: 16px; font-weight: 700; color: var(--color-primary); }
+    .home-how-item p { margin: 0; color: var(--color-text-soft); font-size: 14px; }
+
+    /* ============== UPLOAD ============== */
+    .up-shell {
+      flex: 1; width: 100%; max-width: 1240px; margin: 0 auto;
+      padding: 32px 40px 48px; display: flex; flex-direction: column; gap: 28px;
+    }
+    .up-top { display: flex; align-items: center; justify-content: space-between; }
+    .up-back {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--color-primary); font-weight: 600; font-size: 15px;
+      padding: 10px 16px; border-radius: 999px; transition: background .15s;
+    }
+    .up-back:hover { background: var(--color-bg-soft); }
+    .up-brand { display: inline-flex; align-items: center; gap: 10px; }
+    .up-brand img { width: 36px; height: 36px; object-fit: contain; }
+    .up-brand span { color: var(--color-primary); font-weight: 700; font-size: 15px; }
+    .up-steps { display: flex; gap: 8px; align-items: center; color: var(--color-muted); font-size: 13px; font-weight: 500; }
+    .up-steps .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-border); }
+    .up-steps .dot.active { background: var(--color-secondary); width: 28px; border-radius: 999px; }
+
+    .up-card {
+      background: #fff; border: 1px solid var(--color-border); border-radius: 24px;
+      box-shadow: 0 1px 0 rgba(11,59,36,.02), 0 24px 60px -28px rgba(11,59,36,.18);
+      overflow: hidden; display: grid; grid-template-columns: 360px 1fr;
+    }
+    .up-aside {
+      background: linear-gradient(160deg, #d8ecdc 0%, #c2e2c9 100%);
+      padding: 40px 36px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; min-height: 520px;
+    }
+    .up-aside::after {
+      content: ""; position: absolute; right: -40px; bottom: -40px;
+      width: 220px; height: 220px;
+      background-image: url("paws-trail.png");
+      background-size: contain; background-repeat: no-repeat;
+      opacity: .35; pointer-events: none;
+    }
+    .up-aside-eyebrow {
+      text-transform: uppercase; letter-spacing: .12em; font-size: 12px;
+      font-weight: 700; color: var(--color-primary-2); margin-bottom: 14px;
+    }
+    .up-aside h2 { margin: 0 0 16px; color: var(--color-primary); font-size: 28px; font-weight: 700; line-height: 1.2; }
+    .up-aside p { color: var(--color-text-soft); font-size: 15px; line-height: 1.6; margin: 0; max-width: 280px; }
+    .up-aside p strong { color: var(--color-primary); font-weight: 700; }
+    .up-tips { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+    .up-tips li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--color-text-soft); }
+    .up-tips li::before {
+      content: ""; flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%; background: #fff;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23115d33' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+      background-size: 12px; background-position: center; background-repeat: no-repeat; margin-top: 1px;
+    }
+
+    .up-main { padding: 40px 44px; display: flex; flex-direction: column; gap: 24px; }
+    .up-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .up-head h1 { margin: 0; font-size: 22px; color: var(--color-primary); font-weight: 700; letter-spacing: -0.01em; }
+    .up-head p { margin: 4px 0 0; color: var(--color-muted); font-size: 14px; }
+
+    .up-drop {
+      position: relative; border: 1.5px dashed #b8d2bd; border-radius: 20px;
+      background: radial-gradient(120% 90% at 50% 0%, #f6fbf6 0%, #ffffff 60%);
+      min-height: 320px; display: flex; align-items: center; justify-content: center;
+      text-align: center; color: var(--color-text-soft); cursor: pointer;
+      transition: border-color .2s, background .2s; overflow: hidden;
+    }
+    .up-drop:hover, .up-drop.drag { border-color: var(--color-secondary); background: #f1f8f1; }
+    .up-drop-inner { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 24px; }
+    .up-drop-icon {
+      width: 72px; height: 72px; border-radius: 20px;
+      background: #e7f2ea; color: var(--color-primary-2);
+      display: grid; place-items: center;
+    }
+    .up-drop h3 { margin: 0; color: var(--color-primary); font-size: 17px; font-weight: 700; }
+    .up-drop small { color: var(--color-muted); font-size: 13px; }
+    .up-drop img.preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .up-filemeta {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 16px; background: var(--color-bg-soft);
+      border: 1px solid var(--color-border); border-radius: 12px;
+      font-size: 14px; color: var(--color-text-soft);
+    }
+    .up-filemeta .name { color: var(--color-primary); font-weight: 600; }
+    .up-filemeta button { color: var(--color-primary-2); font-weight: 600; font-size: 13px; }
+    .up-filemeta button:hover { text-decoration: underline; }
+    .up-foot {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding-top: 20px; border-top: 1px solid var(--color-border); margin-top: 4px;
+    }
+    .up-foot .meta { color: var(--color-muted); font-size: 13px; }
+
+    /* ============== CONFIRMACAO (form) ============== */
+    .cf-shell {
+      flex: 1; width: 100%; max-width: 1240px; margin: 0 auto;
+      padding: 32px 40px 48px; display: flex; flex-direction: column; gap: 28px;
+    }
+    .cf-card {
+      background: #fff; border: 1px solid var(--color-border); border-radius: 24px;
+      box-shadow: 0 1px 0 rgba(11,59,36,.02), 0 24px 60px -28px rgba(11,59,36,.18);
+      overflow: hidden; display: grid; grid-template-columns: 360px 1fr;
+    }
+    .cf-main { padding: 40px 44px; display: flex; flex-direction: column; gap: 22px; }
+    .cf-main h1 { margin: 0; font-size: 22px; color: var(--color-primary); font-weight: 700; }
+    .cf-main > p.sub { margin: 0; color: var(--color-muted); font-size: 14px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field label { font-weight: 600; color: var(--color-primary); font-size: 14px; }
+    .field input, .field textarea {
+      border: 1px solid var(--color-border); background: #fff;
+      border-radius: 12px; padding: 12px 14px; font: inherit;
+      color: var(--color-primary); outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .field input:focus, .field textarea:focus {
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 4px rgba(121,183,145,.18);
+    }
+    .field textarea { resize: vertical; min-height: 140px; }
+    .field-wide { grid-column: 1 / -1; }
+    .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--color-border); }
+    .toggle-row {
+      display: inline-flex; align-items: center; gap: 14px;
+      color: var(--color-primary); font-weight: 500; font-size: 14px;
+    }
+    .switch {
+      position: relative; width: 44px; height: 24px; background: #d6e4d8;
+      border-radius: 999px; transition: background .2s; cursor: pointer; flex-shrink: 0;
+    }
+    .switch::after {
+      content: ""; position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; background: #fff; border-radius: 50%;
+      transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .switch.on { background: var(--color-secondary); }
+    .switch.on::after { transform: translateX(20px); }
+
+    /* ============== LISTA ============== */
+    .ls-shell { flex: 1; width: 100%; max-width: 1240px; margin: 0 auto; padding: 32px 40px 56px; display: flex; flex-direction: column; gap: 24px; }
+    .ls-head h1 { font-size: clamp(28px, 4vw, 40px); margin: 0 0 8px; color: var(--color-primary); letter-spacing: -0.01em; }
+    .ls-head p { color: var(--color-text-soft); margin: 0; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .empty-state {
+      grid-column: 1 / -1; text-align: center; padding: 60px 24px;
+      color: var(--color-text-soft); background: var(--color-bg-soft);
+      border: 1.5px dashed var(--color-border); border-radius: var(--radius-lg);
+    }
+    .empty-state h3 { color: var(--color-primary); font-size: 22px; margin: 16px 0 8px; }
+    .empty-state p { margin: 0 auto; max-width: 460px; }
+    .empty-state .empty-icon {
+      display: inline-grid; place-items: center;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #fff; color: var(--color-primary-2); box-shadow: var(--shadow-sm);
+    }
+
+    /* ============== SUCESSO ============== */
+    .sc-wrap {
+      flex: 1; display: grid; place-items: center; text-align: center;
+      padding: 60px 24px; position: relative;
+    }
+    .sc-wrap::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: url("paws-trail.png");
+      background-repeat: no-repeat; background-position: center; background-size: 420px;
+      opacity: .35; z-index: 0;
+    }
+    .sc-wrap > * { position: relative; z-index: 1; }
+    .sc-wrap h1 { font-size: 34px; color: var(--color-primary); margin: 0 0 10px; letter-spacing: -0.01em; }
+    .sc-wrap p { color: var(--color-text-soft); font-size: 18px; max-width: 460px; margin: 0 auto; }
+    .sc-wrap .btn { margin-top: 28px; }
+
+    /* ============== Overlay ============== */
+    .overlay {
+      position: fixed; inset: 0; background: rgba(11,59,36,0.4);
+      display: none; align-items: center; justify-content: center; z-index: 50;
+    }
+    .overlay.show { display: flex; }
+    .spinner {
+      width: 56px; height: 56px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ============== Responsive ============== */
+    @media (max-width: 900px) {
+      .home-wrap { padding: 0 24px; }
+      .home-nav { display: none; }
+      .home-hero { grid-template-columns: 1fr; }
+      .home-art { order: -1; max-width: 240px; margin: 0 auto; }
+      .home-actions { flex-direction: column; align-items: stretch; }
+      .home-actions .home-btn { width: 100%; }
+      .home-how-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      .up-shell, .cf-shell, .ls-shell { padding: 20px 16px 32px; }
+      .up-card, .cf-card { grid-template-columns: 1fr; }
+      .up-aside { min-height: 0; padding: 28px 24px; }
+      .up-aside::after { width: 140px; height: 140px; right: -20px; bottom: -20px; }
+      .up-main, .cf-main { padding: 24px 20px; }
+      .btn { width: 100%; }
+      .up-foot, .form-foot { flex-direction: column-reverse; align-items: stretch; }
+      .up-top .up-brand span { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══ HOME ══ -->
-<div id="page-home" class="page active">
-  <header class="header">
-    <div class="logo-ball"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Ccircle cx='11' cy='4' r='2'/%3E%3Ccircle cx='18' cy='8' r='2'/%3E%3Ccircle cx='4' cy='8' r='2'/%3E%3Cpath d='M6 17c0-3.3 2.7-6 6-6s6 2.7 6 6v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1z'/%3E%3C/svg%3E" alt="pata"/></div>
-    <div class="header-actions">
-      <button class="btn-outline" onclick="goTo('login')">Login</button>
-      <button class="btn-outline" onclick="goTo('register-user')">Registre-se</button>
-    </div>
-  </header>
-  <main class="hero">
-    <h1 class="hero-title">Achou meu pet AI?</h1>
-    <div class="hero-btns">
-      <button class="btn-border" onclick="goTo('search')">Procurar</button>
-      <button class="btn-border" onclick="goTo('register-pet')">Cadastrar</button>
-    </div>
-    <p class="hero-sub">Use IA para encontrar seu animal perdido ou cadastrar um que você encontrou.</p>
-  </main>
-</div>
+  <!-- =============== HOME =============== -->
+  <main class="page" data-route="home">
+    <div class="home-wrap">
+      <header class="home-header">
+        <a class="home-logo" href="#/home" aria-label="Achou meu pet AI?">
+          <img src="lupa.png" alt="Achou meu pet AI?" />
+        </a>
+        <nav class="home-nav">
+          <a href="#/home">Início</a>
+          <a href="#">Sobre</a>
+          <a href="#">Histórias de Sucesso</a>
+        </nav>
+        <button class="home-login" onclick="location.hash='#/login'">Login</button>
+      </header>
 
-<!-- ══ BUSCA ══ -->
-<div id="page-search" class="page">
-  <header class="header">
-    <div class="logo-ball"></div>
-    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
-  </header>
-  <main class="form-main">
-    <div class="form-wrap">
-      <p class="form-label">Fale sobre as características físicas, último lugar visto...</p>
-      <div class="card-form">
-        <textarea id="search-desc" placeholder="Descreva seu animal..." rows="7"></textarea>
-        <div id="search-previews" class="img-previews"></div>
-        <div class="card-footer">
-          <button class="btn-attach" onclick="document.getElementById('search-file').click()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Anexe imagens para facilitar o match
-          </button>
-          <input type="file" id="search-file" accept="image/*" multiple hidden/>
-          <button class="btn-primary" id="search-btn" onclick="handleSearch()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Enviar
-          </button>
-        </div>
-      </div>
-      <p class="status-msg" id="search-status"></p>
-    </div>
-  </main>
-</div>
-
-<!-- ══ RESULTADOS ══ -->
-<div id="page-matches" class="page">
-  <header class="header">
-    <div class="logo-ball"></div>
-    <button class="btn-back" onclick="goTo('search')">← Voltar para busca</button>
-  </header>
-  <main class="matches-main">
-    <p class="form-label">Animais encontrados baseados em sua descrição e fotos anexadas.</p>
-    <div class="matches-row" id="matches-container"></div>
-  </main>
-</div>
-
-<!-- ══ DETALHE DO PET ══ -->
-<div id="page-detail" class="page">
-  <header class="header">
-    <div class="logo-ball"></div>
-    <button class="btn-back" onclick="goTo('matches')">← Voltar</button>
-  </header>
-  <main class="detail-main">
-    <div class="detail-card" id="detail-card"></div>
-  </main>
-</div>
-
-<!-- ══ CADASTRAR PET ══ -->
-<div id="page-register-pet" class="page">
-  <header class="header">
-    <div class="logo-ball"></div>
-    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
-  </header>
-  <main class="form-main">
-    <div class="form-wrap">
-      <p class="form-label">Fale sobre as características físicas do animal, lugar encontrado...</p>
-      <div class="card-form">
-        <div class="input-row">
-          <div class="input-group">
-            <label>Animal</label>
-            <input type="text" id="pet-animal" placeholder="Cachorro..."/>
-          </div>
-          <div class="input-group">
-            <label>Região</label>
-            <input type="text" id="pet-regiao" placeholder="Recife-PE..."/>
+      <section class="home-hero">
+        <div>
+          <h1>Achou meu pet AI?</h1>
+          <p>Você encontrou ou está procurando um pet?<br/>Nós ajudamos a <strong>reconectar vocês.</strong></p>
+          <div class="home-actions">
+            <a class="home-btn" href="#/upload?mode=procurar">Procurar meu Pet</a>
+            <a class="home-btn" href="#/upload?mode=cadastrar">Cadastrar um Pet</a>
+            <a class="home-btn" href="#/lista">Lista de Pets</a>
           </div>
         </div>
-        <textarea id="pet-desc" placeholder="Descreva o animal encontrado..." rows="5"></textarea>
-        <div id="pet-previews" class="img-previews"></div>
-        <div class="card-footer">
-          <button class="btn-attach" onclick="document.getElementById('pet-file').click()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Anexe imagens para facilitar o match
-          </button>
-          <input type="file" id="pet-file" accept="image/*" multiple hidden/>
-          <button class="btn-primary" id="pet-btn" onclick="handleRegisterPet()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Enviar
-          </button>
+        <div class="home-art">
+          <img src="hero-pets.png" alt="Ilustração de cão e gato" />
         </div>
-      </div>
-      <p class="status-msg" id="pet-status"></p>
+      </section>
+
+      <section class="home-how">
+        <h2>Como funciona?</h2>
+        <div class="home-how-grid">
+          <div class="home-how-item"><h3>1.Perdeu ou Encontrou?</h3><p>(Use a busca ou cadastre)</p></div>
+          <div class="home-how-item"><h3>2.Detalhes Importantes.</h3><p>(Adiciona fotos e local)</p></div>
+          <div class="home-how-item"><h3>3.Reencontro Feliz.</h3><p>(Nossa IA aumenta as chances de reencontro)</p></div>
+        </div>
+      </section>
     </div>
   </main>
-</div>
 
-<!-- ══ CADASTRO DE USUÁRIO ══ -->
-<div id="page-register-user" class="page">
-  <header class="header">
-    <div class="logo-ball"></div>
-    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
-  </header>
-  <main class="auth-main">
-    <div class="auth-layout">
-      <div class="auth-form-wrap">
-        <h2 class="auth-title">Cadastro</h2>
-        <form id="form-register" onsubmit="handleRegisterUser(event)">
-          <div class="input-row">
-            <div class="input-group">
-              <label>Nome</label>
-              <input type="text" id="reg-nome" required/>
+  <!-- =============== UPLOAD =============== -->
+  <main class="page" data-route="upload">
+    <div class="up-shell">
+      <header class="up-top">
+        <a class="up-back" href="#/home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </a>
+        <a class="up-brand" href="#/home">
+          <img src="lupa.png" alt="" />
+          <span>Achou meu pet AI?</span>
+        </a>
+        <div class="up-steps"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+      </header>
+
+      <article class="up-card">
+        <aside class="up-aside">
+          <div>
+            <div class="up-aside-eyebrow">Etapa 1 de 3</div>
+            <h2 id="asideTitle">Envie uma foto do pet</h2>
+            <p id="asideText">Adicione o pet ao sistema com uma <strong>imagem nítida</strong>, para que nossa IA gere a descrição e ajude a encontrar futuros matches.</p>
+            <ul class="up-tips">
+              <li>Use boa iluminação</li>
+              <li>Mostre o rosto e o corpo do pet</li>
+              <li>Evite fotos desfocadas</li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="up-main">
+          <div class="up-head">
+            <div>
+              <h1 id="mainTitle">Cadastrar um pet</h1>
+              <p id="mainSub">Anexe ou arraste uma imagem do pet para começar.</p>
             </div>
-            <div class="input-group">
-              <label>Sobrenome</label>
-              <input type="text" id="reg-sobrenome" required/>
+            <button class="btn btn-primary" id="pickBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Anexar foto
+            </button>
+            <input type="file" id="fileInput" accept="image/*" hidden />
+          </div>
+
+          <div class="up-drop" id="dropzone">
+            <div class="up-drop-inner" id="dzContent">
+              <div class="up-drop-icon">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="3"/>
+                  <circle cx="9" cy="9" r="2"/>
+                  <path d="M21 15l-5-5L5 21"/>
+                </svg>
+              </div>
+              <h3>Clique ou arraste uma imagem aqui</h3>
+              <small>PNG, JPG ou WEBP até 10 MB</small>
             </div>
           </div>
-          <div class="input-row">
-            <div class="input-group">
-              <label>Data de nascimento</label>
-              <input type="date" id="reg-data" required/>
+
+          <div id="fileMeta" class="up-filemeta" style="display:none">
+            <div><span class="name" id="fileName"></span> · <span id="fileSize"></span></div>
+            <button type="button" id="removeBtn">Trocar imagem</button>
+          </div>
+
+          <div class="up-foot">
+            <span class="meta">Suas imagens são usadas apenas para auxiliar o reencontro.</span>
+            <div style="display:flex; gap:12px;">
+              <a class="btn btn-ghost" href="#/home">Cancelar</a>
+              <button class="btn btn-dark" id="continueBtn" disabled>Continuar</button>
             </div>
-            <div class="input-group">
-              <label class="label-with-tip">
-                Telefone
-                <button type="button" class="tip-btn" onclick="toggleTooltip()">ℹ</button>
-                <div class="tooltip" id="tooltip">
-                  Os tutores que encontrar seus animais através do seu cadastro vai entrar em contato por este número de telefone.
-                </div>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- =============== CONFIRMACAO =============== -->
+  <main class="page" data-route="confirmacao">
+    <div class="cf-shell">
+      <header class="up-top">
+        <a class="up-back" href="#/upload?mode=cadastrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </a>
+        <a class="up-brand" href="#/home">
+          <img src="lupa.png" alt="" />
+          <span>Achou meu pet AI?</span>
+        </a>
+        <div class="up-steps"><span class="dot"></span><span class="dot active"></span><span class="dot"></span></div>
+      </header>
+
+      <article class="cf-card">
+        <aside class="up-aside">
+          <div>
+            <div class="up-aside-eyebrow">Etapa 2 de 3</div>
+            <h2>Confirme os dados do pet</h2>
+            <p>Verifique as informações preenchidas pela nossa IA e ajuste o que for necessário antes de confirmar o cadastro.</p>
+            <ul class="up-tips">
+              <li>Detalhes ajudam no match</li>
+              <li>Local correto facilita o reencontro</li>
+              <li>Comentários ajudam o tutor</li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="cf-main">
+          <div>
+            <h1>Confirmar dados</h1>
+            <p class="sub">Os campos abaixo foram pré-preenchidos pela IA com base na imagem enviada.</p>
+          </div>
+
+          <form id="petForm" onsubmit="return false">
+            <div class="form-grid">
+              <div class="field"><label>Data</label><input type="date" id="data" /></div>
+              <div class="field"><label>Cidade</label><input id="cidade" type="text" placeholder="Ex: Recife - PE" /></div>
+              <div class="field"><label>Raça</label><input id="raca" type="text" /></div>
+              <div class="field"><label>Porte</label><input id="porte" type="text" /></div>
+              <div class="field field-wide"><label>Cor</label><input id="cor" type="text" /></div>
+              <div class="field field-wide">
+                <label>Comentário</label>
+                <textarea id="comentario" placeholder="Faça um comentário sobre o animal (opcional)"></textarea>
+              </div>
+            </div>
+
+            <div class="form-foot">
+              <label class="toggle-row">
+                <span class="switch" id="contato" role="switch" aria-checked="false"></span>
+                Deseja ser contatado?
               </label>
-              <input type="tel" id="reg-tel" placeholder="(81) 99999-9999" required/>
+              <div style="display:flex; gap:12px;">
+                <a class="btn btn-ghost" href="#/upload?mode=cadastrar">Voltar</a>
+                <button type="button" class="btn btn-dark" id="submit">Cadastrar</button>
+              </div>
             </div>
-          </div>
-          <div class="input-group full">
-            <label>E-mail</label>
-            <input type="email" id="reg-email" required/>
-          </div>
-          <div class="input-group full">
-            <label>Senha</label>
-            <input type="password" id="reg-senha" required minlength="6"/>
-          </div>
-          <div class="input-group full">
-            <label>Confirme a senha</label>
-            <input type="password" id="reg-confirm" required minlength="6"/>
-          </div>
-          <p class="status-msg" id="reg-status"></p>
-          <div class="form-submit-row">
-            <button type="submit" class="btn-outline-dark" id="reg-btn">Registrar</button>
-          </div>
-        </form>
+          </form>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- =============== LISTA =============== -->
+  <main class="page" data-route="lista">
+    <div class="ls-shell">
+      <header class="up-top">
+        <a class="up-back" href="#/home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </a>
+        <a class="up-brand" href="#/home">
+          <img src="lupa.png" alt="" />
+          <span>Achou meu pet AI?</span>
+        </a>
+        <div style="width: 60px"></div>
+      </header>
+
+      <div class="ls-head">
+        <h1>Lista de Animais Cadastrados</h1>
+        <p>Os animais abaixo foram selecionados com base nos filtros selecionados anteriormente.</p>
       </div>
-      <div class="auth-tagline">
-        <h1>Achou meu<br/>pet AI?</h1>
+
+      <div class="cards-grid" id="grid">
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </div>
+          <h3>Nenhum pet para exibir</h3>
+          <p>Os resultados aparecerão aqui assim que o back-end estiver conectado. Cadastre ou procure um pet para começar.</p>
+        </div>
       </div>
     </div>
   </main>
-</div>
 
-<!-- ══ LOGIN ══ -->
-<div id="page-login" class="page">
-  <header class="header">
-    <div class="logo-ball"></div>
-    <button class="btn-back" onclick="goTo('home')">← Voltar</button>
-  </header>
-  <main class="auth-main">
-    <div class="auth-layout">
-      <div class="auth-form-wrap">
-        <h2 class="auth-title">Login</h2>
-        <form id="form-login" onsubmit="handleLogin(event)">
-          <div class="input-group full">
-            <label>E-mail</label>
-            <input type="email" id="login-email" required/>
-          </div>
-          <div class="input-group full">
-            <label>Senha</label>
-            <input type="password" id="login-senha" required/>
-          </div>
-          <p class="status-msg" id="login-status"></p>
-          <div class="form-submit-row" style="justify-content:space-between; align-items:center">
-            <button type="button" class="link-btn" onclick="goTo('register-user')">Não tem conta? Registre-se</button>
-            <button type="submit" class="btn-outline-dark" id="login-btn">Entrar</button>
-          </div>
-        </form>
-      </div>
-      <div class="auth-tagline">
-        <h1>Achou meu<br/>pet AI?</h1>
+  <!-- =============== SUCESSO =============== -->
+  <main class="page" data-route="sucesso">
+    <div class="sc-wrap">
+      <div>
+        <h1>Obrigado por contribuir!</h1>
+        <p>Sua ação pode reunir um pet ao seu tutor.</p>
+        <a class="btn btn-primary" href="#/home">Voltar ao início</a>
       </div>
     </div>
   </main>
-</div>
 
-<!-- Toast -->
-<div id="toast"></div>
 
-<script src="js/app.js"></script>
+  <!-- =============== LOGIN =============== -->
+  <main class="page" data-route="login">
+    <div class="up-shell">
+      <header class="up-top">
+        <a class="up-back" href="#/home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </a>
+        <a class="up-brand" href="#/home">
+          <img src="lupa.png" alt="" />
+          <span>Achou meu pet AI?</span>
+        </a>
+        <div style="width:60px"></div>
+      </header>
+
+      <article class="cf-card" style="max-width:1000px;margin:0 auto;width:100%">
+        <aside class="up-aside">
+          <div>
+            <div class="up-aside-eyebrow">Bem-vindo de volta</div>
+            <h2>Entre na sua conta</h2>
+            <p>Acesse sua conta para gerenciar seus cadastros e acompanhar buscas.</p>
+          </div>
+        </aside>
+        <section class="cf-main">
+          <div>
+            <h1>Login</h1>
+            <p class="sub">Insira seu e-mail e senha para continuar.</p>
+          </div>
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <div class="field field-wide"><label>E-mail</label><input type="email" id="login-email" placeholder="joao@email.com"/></div>
+            <div class="field field-wide"><label>Senha</label><input type="password" id="login-senha" placeholder="Sua senha"/></div>
+          </div>
+          <p id="login-status" style="color:#c0392b;font-size:13px;min-height:18px;margin:0"></p>
+          <div class="form-foot">
+            <button type="button" class="btn btn-ghost" onclick="location.hash='#/cadastro'">Não tem conta? Cadastre-se</button>
+            <button type="button" class="btn btn-dark" id="login-btn" onclick="handleLogin()">Entrar</button>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- =============== CADASTRO =============== -->
+  <main class="page" data-route="cadastro">
+    <div class="up-shell">
+      <header class="up-top">
+        <a class="up-back" href="#/login">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </a>
+        <a class="up-brand" href="#/home">
+          <img src="lupa.png" alt="" />
+          <span>Achou meu pet AI?</span>
+        </a>
+        <div style="width:60px"></div>
+      </header>
+
+      <article class="cf-card" style="max-width:1000px;margin:0 auto;width:100%">
+        <aside class="up-aside">
+          <div>
+            <div class="up-aside-eyebrow">Novo por aqui?</div>
+            <h2>Crie sua conta</h2>
+            <p>Cadastre-se para gerenciar seus pets e receber contato de quem os encontrar.</p>
+          </div>
+        </aside>
+        <section class="cf-main">
+          <div>
+            <h1>Cadastro</h1>
+            <p class="sub">Preencha os dados abaixo para criar sua conta.</p>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Nome</label><input type="text" id="reg-nome" placeholder="João"/></div>
+            <div class="field"><label>Sobrenome</label><input type="text" id="reg-sobrenome" placeholder="Silva"/></div>
+            <div class="field"><label>Data de nascimento</label><input type="date" id="reg-data"/></div>
+            <div class="field">
+              <label>Telefone <span id="tel-tip-btn" style="cursor:pointer;font-size:11px;color:var(--color-primary-2)" onclick="document.getElementById('tel-tip').style.display=document.getElementById('tel-tip').style.display==='none'?'block':'none'">ℹ</span></label>
+              <small id="tel-tip" style="display:none;color:var(--color-muted);margin:-4px 0 4px;font-size:12px">Quem encontrar seu pet vai entrar em contato por este número via WhatsApp.</small>
+              <input type="tel" id="reg-tel" placeholder="(81) 99999-9999"/>
+            </div>
+            <div class="field field-wide"><label>E-mail</label><input type="email" id="reg-email" placeholder="joao@email.com"/></div>
+            <div class="field"><label>Senha</label><input type="password" id="reg-senha" placeholder="Mínimo 6 caracteres"/></div>
+            <div class="field"><label>Confirme a senha</label><input type="password" id="reg-confirm" placeholder="Repita a senha"/></div>
+          </div>
+          <p id="reg-status" style="color:#c0392b;font-size:13px;min-height:18px;margin:0"></p>
+          <div class="form-foot">
+            <button type="button" class="btn btn-ghost" onclick="location.hash='#/login'">Já tem conta? Entrar</button>
+            <button type="button" class="btn btn-dark" id="reg-btn" onclick="handleRegister()">Criar conta</button>
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <div class="overlay" id="overlay"><div class="spinner"></div></div>
+
+  <script>
+    /* =========================================================
+       CONFIG
+       ========================================================= */
+    const BASE_API = 'http://localhost:5000/api';
+
+    /* =========================================================
+       AUTH STATE
+       ========================================================= */
+    const Auth = {
+      get token()  { return localStorage.getItem('access_token'); },
+      get nome()   { return localStorage.getItem('user_nome') || ''; },
+      isLoggedIn() { return !!this.token; },
+      save(d) {
+        localStorage.setItem('access_token', d.access_token);
+        localStorage.setItem('user_nome',    d.nome || '');
+        localStorage.setItem('user_id',      d.user_id || '');
+      },
+      clear() {
+        ['access_token','user_nome','user_id'].forEach(k => localStorage.removeItem(k));
+      }
+    };
+
+    function updateLoginBtn() {
+      const btn = document.querySelector('.home-login');
+      if (!btn) return;
+      if (Auth.isLoggedIn()) {
+        btn.textContent = 'Olá, ' + (Auth.nome || 'usuário') + ' · Sair';
+        btn.onclick = () => { Auth.clear(); updateLoginBtn(); };
+      } else {
+        btn.textContent = 'Login';
+        btn.onclick = () => { location.hash = '#/login'; };
+      }
+    }
+
+    /* =========================================================
+       API REAL
+       ========================================================= */
+    async function apiPost(path, body, isForm = false) {
+      const opts = { method: 'POST' };
+      if (isForm) {
+        opts.body = body;
+      } else {
+        opts.headers = { 'Content-Type': 'application/json' };
+        opts.body = JSON.stringify(body);
+      }
+      const res = await fetch(BASE_API + path, opts);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro desconhecido.');
+      return data;
+    }
+
+    async function apiGet(path) {
+      const res = await fetch(BASE_API + path);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro desconhecido.');
+      return data;
+    }
+
+    /* =========================================================
+       ROUTER (hash-based) — não mexe no visual
+       ========================================================= */
+    function parseHash() {
+      const raw = location.hash.replace(/^#\/?/, '') || 'home';
+      const [path, query] = raw.split('?');
+      const params = new URLSearchParams(query || '');
+      return { path: path || 'home', params };
+    }
+
+    function navigate() {
+      const { path, params } = parseHash();
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.toggle('active', p.dataset.route === path);
+      });
+      window.scrollTo(0, 0);
+      if (path === 'upload')       applyUploadMode(params.get('mode') || 'cadastrar');
+      if (path === 'confirmacao')  hydrateForm();
+      if (path === 'lista')        loadLista();
+      if (path === 'home')         updateLoginBtn();
+    }
+
+    window.addEventListener('hashchange', navigate);
+
+    /* =========================================================
+       UPLOAD
+       ========================================================= */
+    function applyUploadMode(mode) {
+      const isProcurar = mode === 'procurar';
+      document.getElementById('mainTitle').textContent = isProcurar ? 'Procurar meu pet' : 'Cadastrar um pet';
+      document.getElementById('mainSub').textContent   = isProcurar
+        ? 'Envie uma foto do pet perdido para a IA procurar no banco de imagens.'
+        : 'Anexe ou arraste uma imagem do pet para começar.';
+      document.getElementById('asideTitle').textContent = isProcurar ? 'Vamos encontrar seu pet' : 'Envie uma foto do pet';
+      document.getElementById('asideText').innerHTML    = isProcurar
+        ? 'Envie uma foto do seu pet perdido e nossa <strong>IA compara</strong> com os pets já cadastrados em segundos.'
+        : 'Adicione o pet ao sistema com uma <strong>imagem nítida</strong>, para que nossa IA gere a descrição e ajude a encontrar futuros matches.';
+      document.getElementById('continueBtn').textContent = isProcurar ? 'Procurar' : 'Continuar';
+      window._uploadMode = mode;
+    }
+
+    const fileInput   = document.getElementById('fileInput');
+    const pickBtn     = document.getElementById('pickBtn');
+    const dz          = document.getElementById('dropzone');
+    const dzContent   = document.getElementById('dzContent');
+    const fileMeta    = document.getElementById('fileMeta');
+    const fileName    = document.getElementById('fileName');
+    const fileSize    = document.getElementById('fileSize');
+    const removeBtn   = document.getElementById('removeBtn');
+    const continueBtn = document.getElementById('continueBtn');
+    let selectedFile  = null;
+
+    pickBtn.addEventListener('click', () => fileInput.click());
+    dz.addEventListener('click', () => fileInput.click());
+    ['dragenter','dragover'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.add('drag'); }));
+    ['dragleave','drop'].forEach(e => dz.addEventListener(e, ev => { ev.preventDefault(); dz.classList.remove('drag'); }));
+    dz.addEventListener('drop', ev => { if (ev.dataTransfer.files[0]) handleFile(ev.dataTransfer.files[0]); });
+    fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+    removeBtn.addEventListener('click', e => { e.stopPropagation(); resetFile(); });
+
+    function fmt(b){ if(b<1024)return b+' B'; if(b<1048576)return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(2)+' MB'; }
+
+    function handleFile(file) {
+      selectedFile = file;
+      dzContent.style.display = 'none';
+      const existing = dz.querySelector('img.preview'); if (existing) existing.remove();
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file); img.className = 'preview'; img.alt = 'preview';
+      dz.appendChild(img);
+      fileName.textContent = file.name;
+      fileSize.textContent = fmt(file.size);
+      fileMeta.style.display = 'flex';
+      continueBtn.disabled = false;
+    }
+
+    function resetFile() {
+      selectedFile = null; fileInput.value = '';
+      const existing = dz.querySelector('img.preview'); if (existing) existing.remove();
+      dzContent.style.display = 'flex';
+      fileMeta.style.display = 'none';
+      continueBtn.disabled = true;
+    }
+
+    continueBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+      const ov = document.getElementById('overlay');
+      ov.classList.add('show');
+      try {
+        if (window._uploadMode === 'procurar') {
+          // busca real via IA
+          const b64 = await fileToBase64(selectedFile);
+          const result = await apiPost('/pets/search', { image: b64 });
+          window._searchMatches = (result.matches || []).filter(p => (p.similarity || 0) >= 0.75);
+          sessionStorage.setItem('searchMatches', JSON.stringify(window._searchMatches));
+          location.hash = '#/lista';
+        } else {
+          // analisa imagem com IA e vai para confirmação
+          const b64 = await fileToBase64(selectedFile);
+          try {
+            const result = await apiPost('/pets/analyze', { image: b64 });
+            result.data = new Date().toISOString().slice(0, 10);
+            sessionStorage.setItem('petAI', JSON.stringify(result));
+          } catch {
+            sessionStorage.setItem('petAI', JSON.stringify({ data: new Date().toISOString().slice(0, 10) }));
+          }
+          location.hash = '#/confirmacao';
+        }
+      } catch (err) {
+        alert('Erro: ' + err.message);
+      } finally {
+        ov.classList.remove('show');
+      }
+    });
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onloadend = () => resolve(r.result.split(',')[1]);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+    }
+
+    /* =========================================================
+       CONFIRMACAO
+       ========================================================= */
+    function hydrateForm() {
+      const ai = JSON.parse(sessionStorage.getItem('petAI') || '{}');
+      const map = { raca:'breed', porte:'size', cor:'primaryColor', cidade:'lastLocation', data:'data' };
+      Object.entries(map).forEach(([id, key]) => {
+        const val = ai[key] || ai[id];
+        if (val) { const el = document.getElementById(id); if (el) el.value = val; }
+      });
+    }
+
+    const sw = document.getElementById('contato');
+    sw.addEventListener('click', () => {
+      sw.classList.toggle('on');
+      sw.setAttribute('aria-checked', sw.classList.contains('on'));
+    });
+
+    document.getElementById('submit').addEventListener('click', async () => {
+      const cidade = document.getElementById('cidade').value.trim();
+      if (!cidade) { alert('Informe a cidade.'); return; }
+      const ov = document.getElementById('overlay');
+      ov.classList.add('show');
+      try {
+        const fd = new FormData();
+        fd.append('raca',      document.getElementById('raca').value);
+        fd.append('porte',     document.getElementById('porte').value);
+        fd.append('cor',       document.getElementById('cor').value);
+        fd.append('cidade',    cidade);
+        fd.append('data',      document.getElementById('data').value);
+        fd.append('descricao', document.getElementById('comentario').value);
+        fd.append('contato',   sw.classList.contains('on') ? 'sim' : '');
+        if (selectedFile) fd.append('image', selectedFile);
+        await apiPost('/pets/register', fd, true);
+        location.hash = '#/sucesso';
+      } catch (err) {
+        alert('Erro ao cadastrar: ' + err.message);
+      } finally {
+        ov.classList.remove('show');
+      }
+    });
+
+    /* =========================================================
+       LISTA — conectada ao banco
+       ========================================================= */
+    function timeAgo(d) {
+      if (!d) return '';
+      const diff = Date.now() - new Date(d).getTime();
+      const m = Math.floor(diff / 60000);
+      if (m < 1)  return 'agora';
+      if (m < 60) return m + 'm atrás';
+      const h = Math.floor(m / 60);
+      if (h < 24) return h + 'h atrás';
+      return Math.floor(h / 24) + 'd atrás';
+    }
+
+    async function loadLista() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '<div class="empty-state"><p>Carregando...</p></div>';
+
+      // Se viemos de uma busca por foto, mostra os matches
+      const cached = sessionStorage.getItem('searchMatches');
+      if (cached) {
+        sessionStorage.removeItem('searchMatches');
+        renderCards(JSON.parse(cached), true);
+        return;
+      }
+
+      try {
+        const pets = await apiGet('/pets');
+        renderCards(pets, false);
+      } catch (err) {
+        grid.innerHTML = `<div class="empty-state"><h3>Erro ao carregar</h3><p>${err.message}</p></div>`;
+      }
+    }
+
+    function renderCards(pets, showSimilarity) {
+      const grid = document.getElementById('grid');
+      if (!pets || !pets.length) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+            <h3>Nenhum pet encontrado</h3>
+            <p>Tente uma foto diferente ou aguarde novos cadastros.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = pets.map(p => {
+        const pct   = showSimilarity && p.similarity ? Math.round(p.similarity * 100) + '%' : '';
+        const badge = pct
+          ? `<span style="display:inline-block;background:var(--color-dark);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:8px">${pct}</span>`
+          : `<span style="display:inline-block;background:var(--color-secondary);color:var(--color-primary);font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:8px">${p.status || 'encontrado'}</span>`;
+        return `
+          <article style="background:#fff;border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-lg)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+            <div style="position:relative;aspect-ratio:1;overflow:hidden;background:var(--color-bg)">
+              ${p.imageUrl
+                ? `<img src="${p.imageUrl}" alt="pet" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none'">`
+                : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🐾</div>`}
+            </div>
+            <div style="padding:14px 16px">
+              ${badge}
+              <div style="font-weight:600;color:var(--color-primary);font-size:15px">${p.lastLocation || 'Local não informado'}</div>
+              <div style="font-size:12px;color:var(--color-muted);margin-top:3px">${timeAgo(p.createdAt || p.created_at)}</div>
+            </div>
+          </article>`;
+      }).join('');
+    }
+
+    /* =========================================================
+       LOGIN
+       ========================================================= */
+    async function handleLogin() {
+      const email = document.getElementById('login-email').value.trim();
+      const senha = document.getElementById('login-senha').value;
+      const status = document.getElementById('login-status');
+      const btn    = document.getElementById('login-btn');
+      if (!email || !senha) { status.textContent = 'Preencha e-mail e senha.'; return; }
+      btn.disabled = true; btn.textContent = 'Entrando...'; status.textContent = '';
+      try {
+        const data = await apiPost('/auth/login', { email, senha });
+        Auth.save(data);
+        updateLoginBtn();
+        location.hash = '#/home';
+      } catch (err) {
+        status.textContent = err.message;
+      } finally {
+        btn.disabled = false; btn.textContent = 'Entrar';
+      }
+    }
+
+    /* =========================================================
+       CADASTRO
+       ========================================================= */
+    async function handleRegister() {
+      const senha   = document.getElementById('reg-senha').value;
+      const confirm = document.getElementById('reg-confirm').value;
+      const status  = document.getElementById('reg-status');
+      const btn     = document.getElementById('reg-btn');
+
+      if (senha !== confirm) { status.textContent = 'As senhas não coincidem.'; return; }
+      if (senha.length < 6)  { status.textContent = 'Senha deve ter ao menos 6 caracteres.'; return; }
+
+      btn.disabled = true; btn.textContent = 'Criando conta...'; status.textContent = '';
+      try {
+        await apiPost('/auth/register', {
+          nome:           document.getElementById('reg-nome').value,
+          sobrenome:      document.getElementById('reg-sobrenome').value,
+          dataNascimento: document.getElementById('reg-data').value,
+          telefone:       document.getElementById('reg-tel').value,
+          email:          document.getElementById('reg-email').value,
+          senha,
+        });
+        status.style.color = '#27ae60';
+        status.textContent = 'Conta criada! Verifique seu e-mail. ✓';
+        setTimeout(() => { location.hash = '#/login'; }, 2000);
+      } catch (err) {
+        status.style.color = '#c0392b';
+        status.textContent = err.message;
+      } finally {
+        btn.disabled = false; btn.textContent = 'Criar conta';
+      }
+    }
+
+    /* =========================================================
+       BOOT
+       ========================================================= */
+    if (!location.hash) location.hash = '#/home';
+    navigate();
+  </script>
 </body>
 </html>
