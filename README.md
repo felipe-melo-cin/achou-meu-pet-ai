@@ -391,7 +391,7 @@ O projeto é desenvolvido por uma equipe de 6 integrantes com papéis rotativos:
 | Bianca Almeida | Front-End / UX |
 | Felipe Melo | Back-End & IA |
 | Gabriel Belo | Back-End & IA |
-| Sophia Santos | Front-End / UX |
+| Pedro Henrique | Front-End / UX |
 | Iasmym Lorany | Liderança de Produto (PO/PM) |
 
 ---
