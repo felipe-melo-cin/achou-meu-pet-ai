@@ -117,8 +117,7 @@ achou-meu-pet-ai/
 │   ├── app.py                  # Entry point Flask, blueprints, rota /api/health
 │   ├── requirements.txt        # Dependências Python
 │   ├── .env.example            # Template de variáveis de ambiente
-│   ├── models/
-│   │   └── __init__.py         # Reservado para DTOs futuros
+│   │
 │   ├── routes/
 │   │   ├── __init__.py
 │   │   ├── auth.py             # POST /api/auth/register, POST /api/auth/login

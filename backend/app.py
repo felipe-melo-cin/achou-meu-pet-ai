@@ -2,6 +2,18 @@ import os
 from flask import Flask, send_from_directory, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+from werkzeug.exceptions import BadRequest
+import logging
+
+# Configura o formato do log (Data, Hora, Nível de erro, Mensagem)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler("app_history.log"), # Salva o histórico em arquivo
+        logging.StreamHandler()                # Exibe no console
+    ]
+)
 
 load_dotenv()
 
@@ -11,6 +23,16 @@ FRONTEND    = os.path.join(BASE_DIR, '..', 'frontend')
 
 app = Flask(__name__, static_folder=FRONTEND)
 CORS(app)
+
+@app.errorhandler(BadRequest)
+def handle_bad_request(e):
+    return jsonify({'error': 'JSON malformado ou requisição inválida.'}), 400
+
+@app.errorhandler(Exception)
+def handle_unexpected_error(e):
+    # Aqui você loga o erro real internamente (veja passo abaixo)
+    # mas retorna uma mensagem genérica e segura para o usuário
+    return jsonify({'error': 'Ocorreu um erro interno no servidor. Tente novamente mais tarde.'}), 500
 
 # ── Blueprints ──────────────────────────────────────────
 from routes.pets  import pets_bp
