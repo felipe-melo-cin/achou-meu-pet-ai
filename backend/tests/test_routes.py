@@ -106,3 +106,21 @@ class TestAuthRegisterRoute:
                            content_type="application/json")
         assert resp.status_code == 200
         assert resp.get_json()["success"] is True
+
+# Testar a rota de login que estava esquecida
+class TestAuthLoginRoute:
+    @patch("routes.auth.login_user", return_value={"access_token": "token123", "user_id": "1", "nome": "User"})
+    def test_login_sucesso(self, mock_login, client):
+        resp = client.post("/api/auth/login", 
+                           data=json.dumps({"email": "u@b.com", "senha": "123"}), 
+                           content_type="application/json")
+        assert resp.status_code == 200
+        assert "access_token" in resp.get_json()
+
+# Testar as outras rotas de Pets
+class TestRemainingPetsRoutes:
+    @patch("routes.pets.list_pets", return_value=[{"id": "1"}])
+    def test_get_pets_route(self, mock_list, client):
+        resp = client.get("/api/pets")
+        assert resp.status_code == 200
+        assert len(resp.get_json()) == 1

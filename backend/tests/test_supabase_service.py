@@ -148,3 +148,22 @@ class TestLoginUser:
         from services.supabase_service import login_user
         with pytest.raises(ValueError, match="Email ou senha incorretos"):
             login_user("errado@email.com", "senhaerrada")
+
+# Adicione suporte para testar as funções em falta:
+class TestMissingSupabaseServices:
+    @patch("services.supabase_service.supabase")
+    def test_upload_image_sucesso(self, mock_sb):
+        from services.supabase_service import upload_image
+        mock_sb.storage.from_().get_public_url.return_value = "https://fake-url.com/img.jpg"
+        url = upload_image(b"fakebytes", "jpg")
+        assert url == "https://fake-url.com/img.jpg"
+
+    @patch("services.supabase_service.supabase")
+    def test_register_user_sucesso(self, mock_sb):
+        from services.supabase_service import register_user
+        mock_user = MagicMock()
+        mock_user.id = "user-uuid-999"
+        mock_sb.auth.sign_up.return_value.user = mock_user
+        
+        res = register_user("test@email.com", "senha123", {"nome": "Teste"})
+        assert res["user_id"] == "user-uuid-999"
