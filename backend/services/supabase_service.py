@@ -67,7 +67,6 @@ def search_similar_pets(embedding: list, threshold: float = 0.5, limit: int = 10
 
 
 def register_user(email: str, password: str, metadata: dict) -> dict:
-    """Cria usuário via Supabase Auth."""
     response = supabase.auth.sign_up({
         "email":    email,
         "password": password,
@@ -75,7 +74,13 @@ def register_user(email: str, password: str, metadata: dict) -> dict:
     })
     if not response.user:
         raise ValueError("Falha ao criar usuário.")
-    return {"user_id": str(response.user.id)}
+    
+    # Avisa se precisa confirmar email
+    email_confirmed = response.user.email_confirmed_at is not None
+    return {
+        "user_id": str(response.user.id),
+        "email_confirmation_required": not email_confirmed,
+    }
 
 
 def login_user(email: str, password: str) -> dict:
