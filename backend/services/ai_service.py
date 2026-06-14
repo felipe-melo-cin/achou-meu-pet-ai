@@ -25,6 +25,8 @@ def pet_vision_analysis(base64_image: str) -> dict:
         "X-Title": "Achou Meu Pet"
     }
 
+    # Restaurado o modelo solicitado. Removido 'response_format' para evitar erros 400/404 
+    # de parâmetros não suportados por este modelo de OCR específico no OpenRouter.
     payload = {
         "model": "baidu/qianfan-ocr-fast:free",
         "messages": [{
@@ -43,8 +45,7 @@ def pet_vision_analysis(base64_image: str) -> dict:
                     "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
                 },
             ],
-        }],
-        "response_format": {"type": "json_object"},
+        }]
     }
 
     try:
@@ -54,7 +55,16 @@ def pet_vision_analysis(base64_image: str) -> dict:
             json=payload,
             timeout=30
         )
-        response.raise_for_status()
+        
+        # Se a API retornar erro, extraímos a mensagem detalhada de resposta do OpenRouter
+        if response.status_code != 200:
+            try:
+                err_data = response.json()
+                err_msg = err_data.get("error", {}).get("message", response.text)
+            except Exception:
+                err_msg = response.text
+            raise ExternalServiceError(f"Erro na API do OpenRouter (Status {response.status_code}): {err_msg}")
+
         res_data = response.json()
         content = res_data["choices"][0]["message"]["content"]
     except requests.exceptions.RequestException as re_err:
@@ -65,30 +75,29 @@ def pet_vision_analysis(base64_image: str) -> dict:
     if not content:
         raise ExternalServiceError("O modelo de visão de IA não retornou nenhum conteúdo válido.")
 
+    # Remove eventuais marcações de bloco de código markdown de forma limpa
+    clean = content.strip()
+    if clean.startswith("```"):
+        clean = re.sub(r"^json)?\s*", "", clean)
+        clean = re.sub(r"\s*```$", "", clean)
+    clean = clean.strip()
+
     try:
-        # Remove eventuais marcações de bloco de código markdown no JSON retornado
-        clean = re.sub(r"json)?", "", content).strip().rstrip("`").strip()
-
         return json.loads(clean)
-    except json.JSONDecodeError as json_err:
-        raise ExternalServiceError(f"Resposta de IA malformada para decodificação em JSON: {str(json_err)}")
+    except json.JSONDecodeError:
+        # Fallback inteligente procurando as chaves { ... } usando a variável 'content' correta
+        match_braces = re.search(r"(\{.*\})", content, re.DOTALL)
+        if match_braces:
+            try:
+                return json.loads(match_braces.group(1).strip())
+            except json.JSONDecodeError as json_err:
+                raise ExternalServiceError(
+                    f"Resposta de IA malformada para decodificação em JSON: {str(json_err)}. "
+                    f"Conteúdo bruto retornado: {content}"
+                )
+        
+        raise ExternalServiceError(f"Nenhum bloco de dados JSON válido foi encontrado no retorno da IA. Conteúdo bruto: {content}")
 
-    match = re.search(r"json)?\s*(\.*?\)\s*```", raw_text, re.DOTALL)
-    if match:
-        try:
-            return json.loads(match.group(1).strip())
-        except Exception:
-            pass
-
-    # 3. Faz o fallback procurando qualquer conteúdo entre as primeiras chaves { e }
-    match_braces = re.search(r"(\{.*?\})", raw_text, re.DOTALL)
-    if match_braces:
-        try:
-            return json.loads(match_braces.group(1).strip())
-        except Exception:
-            pass
-
-    raise ValueError("Nenhum bloco de dados JSON válido foi encontrado no retorno.")
 
 def generate_embedding(base64_image: str) -> list[float]:
     """
@@ -101,11 +110,11 @@ def generate_embedding(base64_image: str) -> list[float]:
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://achoumeupetai.com",
+        "HTTP-Referer": "[https://achoumeupetai.com](https://achoumeupetai.com)",
         "X-Title": "Achou Meu Pet"
     }
 
-    api_url = "https://" + "openrouter.ai/api/v1/embeddings"
+    api_url = "[https://openrouter.ai/api/v1/embeddings](https://openrouter.ai/api/v1/embeddings)"
 
     # Passamos o input de forma multimodal utilizando uma instrução genérica juntamente com a imagem do pet.
     payload = {
@@ -135,7 +144,16 @@ def generate_embedding(base64_image: str) -> list[float]:
             json=payload,
             timeout=30
         )
-        response.raise_for_status()
+        
+        # Tratamento de erro robusto para a rota de embeddings
+        if response.status_code != 200:
+            try:
+                err_data = response.json()
+                err_msg = err_data.get("error", {}).get("message", response.text)
+            except Exception:
+                err_msg = response.text
+            raise ExternalServiceError(f"Erro na API do OpenRouter ao gerar embeddings (Status {response.status_code}): {err_msg}")
+
         res_data = response.json()
         
         # Garante a extração correta do vetor gerado
