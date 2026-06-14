@@ -1,19 +1,18 @@
-import logging  # <-- Importa o módulo de logs
+import logging
 from flask import Blueprint, request, jsonify
 from services.supabase_service import register_user, login_user
+from errors import DatabaseIntegrationError
 
 auth_bp = Blueprint('auth', __name__)
 
+
 @auth_bp.route('/auth/register', methods=['POST'])
 def register():
-    # Histórico de chamada da API
     logging.info("Rota /auth/register acionada.")
     
     data = request.get_json()
-    
-    # Validação para evitar que o backend quebre se o JSON vier vazio/malformado
     if not data:
-        logging.warning("Tentativa de registro com corpo da requisição vazio ou malformado.")
+        logging.warning("Tentativa de registro rejeitada: corpo vazio ou inválido.")
         return jsonify({'error': 'Corpo da requisição inválido.'}), 400
 
     email    = data.get('email', '').strip()
@@ -30,18 +29,23 @@ def register():
         return jsonify({'error': 'Email e senha obrigatórios.'}), 400
 
     if len(password) < 6:
-        logging.warning(f"Tentativa de registro com senha muito curta para o email: {email}")
+        logging.warning(f"Tentativa de registro com senha muito curta: {email}")
         return jsonify({'error': 'Senha deve ter ao menos 6 caracteres.'}), 400
 
     try:
         result = register_user(email, password, metadata)
         logging.info(f"Usuário criado com sucesso! ID: {result.get('user_id')}")
         return jsonify({'success': True, **result})
+    except ValueError as ve:
+        logging.warning(f"Erro de validação de negócios no cadastro: {str(ve)}")
+        return jsonify({'error': str(ve)}), 400
+    except DatabaseIntegrationError as die:
+        # O tratador global em app.py cuida de retornar o erro, mas gravamos o log aqui primeiro
+        logging.error(f"Erro de banco durante registro do usuário ({email}): {die.message}", exc_info=True)
+        raise die
     except Exception as e:
-        # Grava o erro real com o traceback completo no arquivo de log
-        logging.error(f"Erro ao registrar usuário ({email}): {str(e)}", exc_info=True)
-        # Retorna uma mensagem genérica e segura para a API cliente
-        return jsonify({'error': 'Erro interno ao processar o cadastro.'}), 500
+        logging.error(f"Erro inesperado no cadastro ({email}): {str(e)}", exc_info=True)
+        return jsonify({'error': 'Erro interno inesperado ao cadastrar usuário.'}), 500
 
 
 @auth_bp.route('/auth/login', methods=['POST'])
@@ -49,7 +53,6 @@ def login():
     logging.info("Rota /auth/login acionada.")
     
     data = request.get_json()
-    
     if not data:
         logging.warning("Tentativa de login com corpo da requisição inválido.")
         return jsonify({'error': 'Corpo da requisição inválido.'}), 400
@@ -58,7 +61,7 @@ def login():
     password = data.get('senha', '').strip()
 
     if not email or not password:
-        logging.warning("Tentativa de login sem informar as credenciais.")
+        logging.warning("Tentativa de login sem informar credenciais completas.")
         return jsonify({'error': 'Email e senha obrigatórios.'}), 400
 
     try:
@@ -66,10 +69,11 @@ def login():
         logging.info(f"Usuário autenticado com sucesso! ID: {result.get('user_id')}")
         return jsonify({'success': True, **result})
     except ValueError as ve:
-        # Erros esperados de negócio (ex: senha incorreta) geram um warning
-        logging.warning(f"Falha de autenticação para o usuário {email}: {str(ve)}")
-        return jsonify({'error': str(ve)}), 401  # Mudado para 401 (Não autorizado) que faz mais sentido que 500
+        logging.warning(f"Falha de credenciais para {email}: {str(ve)}")
+        return jsonify({'error': str(ve)}), 401
+    except DatabaseIntegrationError as die:
+        logging.error(f"Erro de persistência de banco de dados no login de {email}: {die.message}", exc_info=True)
+        raise die
     except Exception as e:
-        # Erros inesperados de sistema (banco fora do ar, erro de rede, etc) geram um error
         logging.error(f"Erro inesperado no login do usuário {email}: {str(e)}", exc_info=True)
-        return jsonify({'error': 'Erro interno ao processar o login.'}), 500
+        return jsonify({'error': 'Erro interno inesperado ao processar o login.'}), 500

@@ -493,3 +493,636 @@ Traceback (most recent call last):
     raise StorageException({**resp, "statusCode": response.status_code})
 storage3.utils.StorageException: {'statusCode': 400, 'error': 'Unauthorized', 'message': 'new row violates row-level security policy'}
 2026-06-10 23:44:11,400 [INFO] 127.0.0.1 - - [10/Jun/2026 23:44:11] "[35m[1mPOST /api/pets/register HTTP/1.1[0m" 500 -
+2026-06-14 18:48:49,693 [WARNING]  * Debugger is active!
+2026-06-14 18:48:49,699 [INFO]  * Debugger PIN: 546-200-662
+2026-06-14 18:49:02,216 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 18:49:02,216 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 18:49:02,217 [INFO]  * Restarting with stat
+2026-06-14 18:49:02,433 [WARNING]  * Debugger is active!
+2026-06-14 18:49:02,438 [INFO]  * Debugger PIN: 101-056-587
+2026-06-14 18:49:05,409 [INFO] 127.0.0.1 - - [14/Jun/2026 18:49:05] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 18:49:05,465 [INFO] 127.0.0.1 - - [14/Jun/2026 18:49:05] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 18:49:05,466 [INFO] 127.0.0.1 - - [14/Jun/2026 18:49:05] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 18:49:05,479 [INFO] 127.0.0.1 - - [14/Jun/2026 18:49:05] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 18:59:32,693 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 18:59:32,761 [INFO]  * Restarting with stat
+2026-06-14 19:36:00,307 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 19:36:00,307 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 19:36:00,307 [INFO]  * Restarting with stat
+2026-06-14 19:36:00,474 [WARNING]  * Debugger is active!
+2026-06-14 19:36:00,479 [INFO]  * Debugger PIN: 288-498-323
+2026-06-14 19:36:02,736 [INFO] 127.0.0.1 - - [14/Jun/2026 19:36:02] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:36:02,800 [INFO] 127.0.0.1 - - [14/Jun/2026 19:36:02] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:36:02,800 [INFO] 127.0.0.1 - - [14/Jun/2026 19:36:02] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:36:02,814 [INFO] 127.0.0.1 - - [14/Jun/2026 19:36:02] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 19:38:25,444 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:25] "GET / HTTP/1.1" 200 -
+2026-06-14 19:38:25,760 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:25] "GET /lupa.png HTTP/1.1" 200 -
+2026-06-14 19:38:25,760 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:25] "GET /hero-pets.png HTTP/1.1" 200 -
+2026-06-14 19:38:25,765 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:25] "GET /favicon.ico HTTP/1.1" 200 -
+2026-06-14 19:38:25,774 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:25] "GET /paws-trail.png HTTP/1.1" 200 -
+2026-06-14 19:38:42,382 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:42] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+2026-06-14 19:38:42,383 [INFO] Rota /auth/login acionada.
+2026-06-14 19:38:43,305 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 400 Bad Request"
+2026-06-14 19:38:43,308 [WARNING] Falha de credenciais para meupetai1@gmail.com: Email ou senha incorretos.
+2026-06-14 19:38:43,309 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:43] "[31m[1mPOST /api/auth/login HTTP/1.1[0m" 401 -
+2026-06-14 19:38:52,364 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:52] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+2026-06-14 19:38:52,366 [INFO] Rota /auth/login acionada.
+2026-06-14 19:38:53,374 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 400 Bad Request"
+2026-06-14 19:38:53,375 [WARNING] Falha de credenciais para meupetai1@gmail.com: Email ou senha incorretos.
+2026-06-14 19:38:53,375 [INFO] 127.0.0.1 - - [14/Jun/2026 19:38:53] "[31m[1mPOST /api/auth/login HTTP/1.1[0m" 401 -
+2026-06-14 19:39:34,646 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/errors.py', reloading
+2026-06-14 19:39:34,697 [INFO]  * Restarting with stat
+2026-06-14 19:39:34,991 [WARNING]  * Debugger is active!
+2026-06-14 19:39:34,997 [INFO]  * Debugger PIN: 137-675-497
+2026-06-14 19:39:38,036 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/errors.py', reloading
+2026-06-14 19:39:38,082 [INFO]  * Restarting with stat
+2026-06-14 19:39:38,269 [WARNING]  * Debugger is active!
+2026-06-14 19:39:38,273 [INFO]  * Debugger PIN: 171-608-920
+2026-06-14 19:39:42,319 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/errors.py', reloading
+2026-06-14 19:39:42,365 [INFO]  * Restarting with stat
+2026-06-14 19:41:27,486 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 19:41:27,487 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 19:41:27,487 [INFO]  * Restarting with stat
+2026-06-14 19:41:27,676 [WARNING]  * Debugger is active!
+2026-06-14 19:41:27,685 [INFO]  * Debugger PIN: 688-191-932
+2026-06-14 19:41:29,677 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:29] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:41:29,746 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:29] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:29,746 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:29] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:29,760 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:29] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:33,082 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:33] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:41:33,098 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:33] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:33,099 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:33] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:41,813 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:41] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:41:41,829 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:41] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:41,830 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:41] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:42,446 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:42] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:41:42,458 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:42] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:41:42,459 [INFO] 127.0.0.1 - - [14/Jun/2026 19:41:42] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:43:12,777 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/app.py', reloading
+2026-06-14 19:43:12,831 [INFO]  * Restarting with stat
+2026-06-14 19:43:13,122 [WARNING]  * Debugger is active!
+2026-06-14 19:43:13,128 [INFO]  * Debugger PIN: 135-335-313
+2026-06-14 19:43:19,225 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:19] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:43:19,237 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:19] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:43:19,237 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:19] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:43:32,233 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 19:43:32,233 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 19:43:32,233 [INFO]  * Restarting with stat
+2026-06-14 19:43:32,470 [WARNING]  * Debugger is active!
+2026-06-14 19:43:32,476 [INFO]  * Debugger PIN: 128-249-977
+2026-06-14 19:43:38,279 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:38] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 19:43:38,306 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:38] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:43:38,306 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:38] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:43:38,341 [INFO] 127.0.0.1 - - [14/Jun/2026 19:43:38] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 19:49:49,772 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 19:49:49,772 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 19:49:49,773 [INFO]  * Restarting with stat
+2026-06-14 19:49:49,952 [WARNING]  * Debugger is active!
+2026-06-14 19:49:49,959 [INFO]  * Debugger PIN: 127-025-861
+2026-06-14 19:49:54,305 [INFO] 127.0.0.1 - - [14/Jun/2026 19:49:54] "GET / HTTP/1.1" 200 -
+2026-06-14 19:49:54,322 [INFO] 127.0.0.1 - - [14/Jun/2026 19:49:54] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 19:49:54,322 [INFO] 127.0.0.1 - - [14/Jun/2026 19:49:54] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 19:49:54,359 [INFO] 127.0.0.1 - - [14/Jun/2026 19:49:54] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 19:50:09,626 [INFO] Rota /auth/login acionada.
+2026-06-14 19:50:10,278 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 400 Bad Request"
+2026-06-14 19:50:10,280 [WARNING] Falha de credenciais para meupetai1@gmail.com: Email ou senha incorretos.
+2026-06-14 19:50:10,280 [INFO] 127.0.0.1 - - [14/Jun/2026 19:50:10] "[31m[1mPOST /api/auth/login HTTP/1.1[0m" 401 -
+2026-06-14 19:50:18,942 [INFO] Rota /auth/login acionada.
+2026-06-14 19:50:19,250 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 400 Bad Request"
+2026-06-14 19:50:19,251 [WARNING] Falha de credenciais para meupetai1@gmail.com: Email ou senha incorretos.
+2026-06-14 19:50:19,251 [INFO] 127.0.0.1 - - [14/Jun/2026 19:50:19] "[31m[1mPOST /api/auth/login HTTP/1.1[0m" 401 -
+2026-06-14 19:50:45,153 [INFO] Rota /auth/register acionada.
+2026-06-14 19:50:45,928 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/signup "HTTP/2 500 Internal Server Error"
+2026-06-14 19:50:45,929 [ERROR] Erro de banco durante registro do usuário (hiloh90826@lidugw.com): Erro durante o cadastro de usuário no provedor de Auth: Error sending confirmation email
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/gotrue/_sync/gotrue_base_api.py", line 120, in _request
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_models.py", line 763, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Server error '500 Internal Server Error' for url 'https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/signup'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 100, in register_user
+    response = supabase.auth.sign_up({
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/gotrue/_sync/gotrue_client.py", line 218, in sign_up
+    response = self._request(
+               ^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/gotrue/_sync/gotrue_base_api.py", line 125, in _request
+    raise handle_exception(e)
+gotrue.errors.AuthApiError: Error sending confirmation email
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/auth.py", line 36, in register
+    result = register_user(email, password, metadata)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 114, in register_user
+    raise DatabaseIntegrationError(f"Erro durante o cadastro de usuário no provedor de Auth: {str(e)}")
+errors.DatabaseIntegrationError: Erro durante o cadastro de usuário no provedor de Auth: Error sending confirmation email
+2026-06-14 19:50:45,937 [ERROR] Exceção customizada interceptada globalmente [DatabaseIntegrationError]: Erro durante o cadastro de usuário no provedor de Auth: Error sending confirmation email
+2026-06-14 19:50:45,938 [INFO] 127.0.0.1 - - [14/Jun/2026 19:50:45] "[35m[1mPOST /api/auth/register HTTP/1.1[0m" 503 -
+2026-06-14 19:51:19,812 [INFO] Rota /auth/register acionada.
+2026-06-14 19:51:20,540 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/signup "HTTP/2 500 Internal Server Error"
+2026-06-14 19:51:20,540 [ERROR] Erro de banco durante registro do usuário (contadolol2007@gmail.com): Erro durante o cadastro de usuário no provedor de Auth: Error sending confirmation email
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/gotrue/_sync/gotrue_base_api.py", line 120, in _request
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_models.py", line 763, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Server error '500 Internal Server Error' for url 'https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/signup'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 100, in register_user
+    response = supabase.auth.sign_up({
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/gotrue/_sync/gotrue_client.py", line 218, in sign_up
+    response = self._request(
+               ^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/gotrue/_sync/gotrue_base_api.py", line 125, in _request
+    raise handle_exception(e)
+gotrue.errors.AuthApiError: Error sending confirmation email
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/auth.py", line 36, in register
+    result = register_user(email, password, metadata)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 114, in register_user
+    raise DatabaseIntegrationError(f"Erro durante o cadastro de usuário no provedor de Auth: {str(e)}")
+errors.DatabaseIntegrationError: Erro durante o cadastro de usuário no provedor de Auth: Error sending confirmation email
+2026-06-14 19:51:20,541 [ERROR] Exceção customizada interceptada globalmente [DatabaseIntegrationError]: Erro durante o cadastro de usuário no provedor de Auth: Error sending confirmation email
+2026-06-14 19:51:20,541 [INFO] 127.0.0.1 - - [14/Jun/2026 19:51:20] "[35m[1mPOST /api/auth/register HTTP/1.1[0m" 503 -
+2026-06-14 19:53:38,831 [INFO] Rota /auth/login acionada.
+2026-06-14 19:53:39,907 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 400 Bad Request"
+2026-06-14 19:53:39,907 [WARNING] Falha de credenciais para meupetai1@gmail.com: Email ou senha incorretos.
+2026-06-14 19:53:39,908 [INFO] 127.0.0.1 - - [14/Jun/2026 19:53:39] "[31m[1mPOST /api/auth/login HTTP/1.1[0m" 401 -
+2026-06-14 19:54:07,835 [INFO] Rota /auth/login acionada.
+2026-06-14 19:54:08,506 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 400 Bad Request"
+2026-06-14 19:54:08,506 [WARNING] Falha de credenciais para meupetai1@gmail.com: Email ou senha incorretos.
+2026-06-14 19:54:08,506 [INFO] 127.0.0.1 - - [14/Jun/2026 19:54:08] "[31m[1mPOST /api/auth/login HTTP/1.1[0m" 401 -
+2026-06-14 19:57:38,287 [INFO] Rota /auth/login acionada.
+2026-06-14 19:57:38,909 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/auth/v1/token?grant_type=password "HTTP/2 200 OK"
+2026-06-14 19:57:38,916 [INFO] Usuário autenticado com sucesso! ID: 11789bfd-4cba-4c20-8fd3-c36e2a9cc4fa
+2026-06-14 19:57:38,916 [INFO] 127.0.0.1 - - [14/Jun/2026 19:57:38] "POST /api/auth/login HTTP/1.1" 200 -
+2026-06-14 19:57:50,946 [INFO] Rota POST /pets/search acionada.
+2026-06-14 19:57:50,949 [INFO] Iniciando geração de embedding visual...
+2026-06-14 19:57:50,953 [ERROR] Erro de infraestrutura (ExternalServiceError) na busca: Falha de comunicação para a geração de embeddings visuais: No connection adapters were found for '[https://openrouter.ai/api/v1/embeddings](https://openrouter.ai/api/v1/embeddings)'
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 112, in generate_embedding
+    response = requests.post(
+               ^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/api.py", line 134, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/sessions.py", line 778, in send
+    adapter = self.get_adapter(url=request.url)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/sessions.py", line 881, in get_adapter
+    raise InvalidSchema(f"No connection adapters were found for {url!r}")
+requests.exceptions.InvalidSchema: No connection adapters were found for '[https://openrouter.ai/api/v1/embeddings](https://openrouter.ai/api/v1/embeddings)'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 42, in search
+    embedding = generate_embedding(image_b64)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 125, in generate_embedding
+    raise ExternalServiceError(f"Falha de comunicação para a geração de embeddings visuais: {str(re_err)}")
+errors.ExternalServiceError: Falha de comunicação para a geração de embeddings visuais: No connection adapters were found for '[https://openrouter.ai/api/v1/embeddings](https://openrouter.ai/api/v1/embeddings)'
+2026-06-14 19:57:50,956 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Falha de comunicação para a geração de embeddings visuais: No connection adapters were found for '[https://openrouter.ai/api/v1/embeddings](https://openrouter.ai/api/v1/embeddings)'
+2026-06-14 19:57:50,956 [INFO] 127.0.0.1 - - [14/Jun/2026 19:57:50] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 502 -
+2026-06-14 19:59:28,862 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:28,933 [INFO]  * Restarting with stat
+2026-06-14 19:59:29,233 [WARNING]  * Debugger is active!
+2026-06-14 19:59:29,239 [INFO]  * Debugger PIN: 342-642-169
+2026-06-14 19:59:30,251 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:30,295 [INFO]  * Restarting with stat
+2026-06-14 19:59:30,513 [WARNING]  * Debugger is active!
+2026-06-14 19:59:30,520 [INFO]  * Debugger PIN: 301-846-198
+2026-06-14 19:59:31,538 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:31,586 [INFO]  * Restarting with stat
+2026-06-14 19:59:31,773 [WARNING]  * Debugger is active!
+2026-06-14 19:59:31,778 [INFO]  * Debugger PIN: 119-949-501
+2026-06-14 19:59:33,805 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:33,893 [INFO]  * Restarting with stat
+2026-06-14 19:59:34,096 [WARNING]  * Debugger is active!
+2026-06-14 19:59:34,101 [INFO]  * Debugger PIN: 142-620-842
+2026-06-14 19:59:35,119 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:35,172 [INFO]  * Restarting with stat
+2026-06-14 19:59:35,371 [WARNING]  * Debugger is active!
+2026-06-14 19:59:35,376 [INFO]  * Debugger PIN: 140-473-460
+2026-06-14 19:59:51,546 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:51,594 [INFO]  * Restarting with stat
+2026-06-14 19:59:51,860 [WARNING]  * Debugger is active!
+2026-06-14 19:59:51,865 [INFO]  * Debugger PIN: 477-916-569
+2026-06-14 19:59:52,885 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:52,938 [INFO]  * Restarting with stat
+2026-06-14 19:59:53,125 [WARNING]  * Debugger is active!
+2026-06-14 19:59:53,130 [INFO]  * Debugger PIN: 127-272-571
+2026-06-14 19:59:54,149 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 19:59:54,203 [INFO]  * Restarting with stat
+2026-06-14 19:59:54,395 [WARNING]  * Debugger is active!
+2026-06-14 19:59:54,399 [INFO]  * Debugger PIN: 982-814-148
+2026-06-14 19:59:56,564 [INFO] Rota POST /pets/search acionada.
+2026-06-14 19:59:56,564 [INFO] Iniciando geração de embedding visual...
+2026-06-14 19:59:56,886 [ERROR] Erro de infraestrutura (ExternalServiceError) na busca: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 118, in generate_embedding
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 42, in search
+    embedding = generate_embedding(image_b64)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 125, in generate_embedding
+    raise ExternalServiceError(f"Falha de comunicação para a geração de embeddings visuais: {str(re_err)}")
+errors.ExternalServiceError: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 19:59:56,892 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 19:59:56,893 [INFO] 127.0.0.1 - - [14/Jun/2026 19:59:56] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 502 -
+2026-06-14 20:01:10,178 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:01:10,180 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:01:10,293 [ERROR] Erro de infraestrutura (ExternalServiceError) na busca: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 118, in generate_embedding
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 42, in search
+    embedding = generate_embedding(image_b64)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 125, in generate_embedding
+    raise ExternalServiceError(f"Falha de comunicação para a geração de embeddings visuais: {str(re_err)}")
+errors.ExternalServiceError: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 20:01:10,294 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 20:01:10,295 [INFO] 127.0.0.1 - - [14/Jun/2026 20:01:10] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 502 -
+2026-06-14 20:03:27,612 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:03:27,613 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:03:27,905 [ERROR] Erro de infraestrutura (ExternalServiceError) na busca: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 118, in generate_embedding
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 42, in search
+    embedding = generate_embedding(image_b64)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 125, in generate_embedding
+    raise ExternalServiceError(f"Falha de comunicação para a geração de embeddings visuais: {str(re_err)}")
+errors.ExternalServiceError: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 20:03:27,905 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 20:03:27,906 [INFO] 127.0.0.1 - - [14/Jun/2026 20:03:27] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 502 -
+2026-06-14 20:04:22,194 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 20:04:22,194 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 20:04:22,195 [INFO]  * Restarting with stat
+2026-06-14 20:04:22,381 [WARNING]  * Debugger is active!
+2026-06-14 20:04:22,387 [INFO]  * Debugger PIN: 104-846-846
+2026-06-14 20:04:24,404 [INFO] 127.0.0.1 - - [14/Jun/2026 20:04:24] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:04:24,426 [INFO] 127.0.0.1 - - [14/Jun/2026 20:04:24] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:04:24,429 [INFO] 127.0.0.1 - - [14/Jun/2026 20:04:24] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:04:28,864 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:04:28,865 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:04:29,195 [ERROR] Erro de infraestrutura (ExternalServiceError) na busca: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 118, in generate_embedding
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 42, in search
+    embedding = generate_embedding(image_b64)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 125, in generate_embedding
+    raise ExternalServiceError(f"Falha de comunicação para a geração de embeddings visuais: {str(re_err)}")
+errors.ExternalServiceError: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 20:04:29,198 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Falha de comunicação para a geração de embeddings visuais: 401 Client Error: Unauthorized for url: https://openrouter.ai/api/v1/embeddings
+2026-06-14 20:04:29,199 [INFO] 127.0.0.1 - - [14/Jun/2026 20:04:29] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 502 -
+2026-06-14 20:05:03,824 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 20:05:03,824 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 20:05:03,825 [INFO]  * Restarting with stat
+2026-06-14 20:05:04,019 [WARNING]  * Debugger is active!
+2026-06-14 20:05:04,027 [INFO]  * Debugger PIN: 120-028-051
+2026-06-14 20:05:07,531 [INFO] 127.0.0.1 - - [14/Jun/2026 20:05:07] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:05:07,544 [INFO] 127.0.0.1 - - [14/Jun/2026 20:05:07] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:05:07,545 [INFO] 127.0.0.1 - - [14/Jun/2026 20:05:07] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:05:11,704 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:05:11,705 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:05:13,397 [INFO] Executando busca de similaridade via pgvector no Supabase...
+2026-06-14 20:05:13,453 [ERROR] Erro de infraestrutura (DatabaseIntegrationError) na busca: Falha de processamento na consulta por similaridade vetorial (pgvector): [Errno 8] nodename nor servname provided, or not known
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 72, in map_httpcore_exceptions
+    yield
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 236, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 85, in search_similar_pets
+    }).execute()
+       ^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/postgrest/_sync/request_builder.py", line 114, in execute
+    r = self.session.request(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 837, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 926, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 954, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 991, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1027, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 235, in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 89, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 45, in search
+    matches = search_similar_pets(embedding, threshold=0.5)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 92, in search_similar_pets
+    raise DatabaseIntegrationError(f"Falha de processamento na consulta por similaridade vetorial (pgvector): {str(e)}")
+errors.DatabaseIntegrationError: Falha de processamento na consulta por similaridade vetorial (pgvector): [Errno 8] nodename nor servname provided, or not known
+2026-06-14 20:05:13,462 [ERROR] Exceção customizada interceptada globalmente [DatabaseIntegrationError]: Falha de processamento na consulta por similaridade vetorial (pgvector): [Errno 8] nodename nor servname provided, or not known
+2026-06-14 20:05:13,462 [INFO] 127.0.0.1 - - [14/Jun/2026 20:05:13] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 503 -
+2026-06-14 20:07:07,646 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:07] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:07:07,662 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:07] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:07:07,662 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:07] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:07:11,328 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:07:11,328 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:07:12,981 [INFO] Executando busca de similaridade via pgvector no Supabase...
+2026-06-14 20:07:13,029 [ERROR] Erro de infraestrutura (DatabaseIntegrationError) na busca: Falha de processamento na consulta por similaridade vetorial (pgvector): [Errno 8] nodename nor servname provided, or not known
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 72, in map_httpcore_exceptions
+    yield
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 236, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    raise exc
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_sync/connection.py", line 124, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_backends/sync.py", line 207, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 85, in search_similar_pets
+    }).execute()
+       ^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/postgrest/_sync/request_builder.py", line 114, in execute
+    r = self.session.request(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 837, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 926, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 954, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 991, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1027, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 235, in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 89, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 45, in search
+    matches = search_similar_pets(embedding, threshold=0.5)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 92, in search_similar_pets
+    raise DatabaseIntegrationError(f"Falha de processamento na consulta por similaridade vetorial (pgvector): {str(e)}")
+errors.DatabaseIntegrationError: Falha de processamento na consulta por similaridade vetorial (pgvector): [Errno 8] nodename nor servname provided, or not known
+2026-06-14 20:07:13,030 [ERROR] Exceção customizada interceptada globalmente [DatabaseIntegrationError]: Falha de processamento na consulta por similaridade vetorial (pgvector): [Errno 8] nodename nor servname provided, or not known
+2026-06-14 20:07:13,031 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:13] "[35m[1mPOST /api/pets/search HTTP/1.1[0m" 503 -
+2026-06-14 20:07:18,648 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 20:07:18,648 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 20:07:18,649 [INFO]  * Restarting with stat
+2026-06-14 20:07:18,851 [WARNING]  * Debugger is active!
+2026-06-14 20:07:18,861 [INFO]  * Debugger PIN: 139-204-216
+2026-06-14 20:07:20,307 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:20] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:07:20,319 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:20] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:07:20,319 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:20] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:07:24,104 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:07:24,104 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:07:25,520 [INFO] Executando busca de similaridade via pgvector no Supabase...
+2026-06-14 20:07:26,523 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/rest/v1/rpc/match_pets "HTTP/2 200 OK"
+2026-06-14 20:07:26,525 [INFO] Busca finalizada. 0 correspondências encontradas.
+2026-06-14 20:07:26,525 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:26] "POST /api/pets/search HTTP/1.1" 200 -
+2026-06-14 20:07:36,336 [INFO] Rota POST /pets/analyze acionada.
+2026-06-14 20:07:36,337 [INFO] Fazendo chamada de análise visual do modelo Vision...
+2026-06-14 20:07:36,718 [ERROR] Falha de IA ao analisar imagem: Erro na requisição para análise visual de IA: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 55, in pet_vision_analysis
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 126, in analyze
+    analysis = pet_vision_analysis(image_b64)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 59, in pet_vision_analysis
+    raise ExternalServiceError(f"Erro na requisição para análise visual de IA: {str(re_err)}")
+errors.ExternalServiceError: Erro na requisição para análise visual de IA: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+2026-06-14 20:07:36,725 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Erro na requisição para análise visual de IA: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+2026-06-14 20:07:36,725 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:36] "[35m[1mPOST /api/pets/analyze HTTP/1.1[0m" 502 -
+2026-06-14 20:07:54,241 [INFO] Rota POST /pets/register acionada.
+2026-06-14 20:07:54,243 [INFO] Fazendo upload da foto para o Supabase Storage...
+2026-06-14 20:07:55,213 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/storage/v1/object/pet_images/pets/2c90f68c-283a-4d6b-bd5e-3f4c041e3b7a.jpg "HTTP/2 400 Bad Request"
+2026-06-14 20:07:55,214 [ERROR] Erro de infraestrutura ao cadastrar pet: Erro ao salvar arquivo de imagem no armazenamento: {'statusCode': 400, 'error': 'Unauthorized', 'message': 'new row violates row-level security policy'}
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/storage3/_sync/file_api.py", line 49, in _request
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/httpx/_models.py", line 763, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '400 Bad Request' for url 'https://ypqhiwzpahzbkfnkqhqj.supabase.co/storage/v1/object/pet_images/pets/2c90f68c-283a-4d6b-bd5e-3f4c041e3b7a.jpg'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 28, in upload_image
+    supabase.storage.from_("pet_images").upload(
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/storage3/_sync/file_api.py", line 459, in upload
+    return self._upload_or_update("POST", path, file, file_options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/storage3/_sync/file_api.py", line 432, in _upload_or_update
+    response = self._request(
+               ^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/storage3/_sync/file_api.py", line 53, in _request
+    raise StorageException({**resp, "statusCode": response.status_code})
+storage3.utils.StorageException: {'statusCode': 400, 'error': 'Unauthorized', 'message': 'new row violates row-level security policy'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 80, in register
+    image_url = upload_image(file_bytes, ext)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/supabase_service.py", line 35, in upload_image
+    raise DatabaseIntegrationError(f"Erro ao salvar arquivo de imagem no armazenamento: {str(e)}")
+errors.DatabaseIntegrationError: Erro ao salvar arquivo de imagem no armazenamento: {'statusCode': 400, 'error': 'Unauthorized', 'message': 'new row violates row-level security policy'}
+2026-06-14 20:07:55,220 [ERROR] Exceção customizada interceptada globalmente [DatabaseIntegrationError]: Erro ao salvar arquivo de imagem no armazenamento: {'statusCode': 400, 'error': 'Unauthorized', 'message': 'new row violates row-level security policy'}
+2026-06-14 20:07:55,221 [INFO] 127.0.0.1 - - [14/Jun/2026 20:07:55] "[35m[1mPOST /api/pets/register HTTP/1.1[0m" 503 -
+2026-06-14 20:14:51,520 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 20:14:51,587 [INFO]  * Restarting with stat
+2026-06-14 20:15:37,858 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 20:15:37,858 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 20:15:37,859 [INFO]  * Restarting with stat
+2026-06-14 20:15:38,076 [WARNING]  * Debugger is active!
+2026-06-14 20:15:38,084 [INFO]  * Debugger PIN: 398-984-664
+2026-06-14 20:15:40,586 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:40] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:15:40,628 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:40] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:15:40,628 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:40] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:15:43,277 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:43] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:15:43,299 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:43] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:15:43,299 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:43] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:15:53,342 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:53] "[36mGET / HTTP/1.1[0m" 304 -
+2026-06-14 20:15:53,371 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:53] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 20:15:53,373 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:53] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 20:15:53,408 [INFO] 127.0.0.1 - - [14/Jun/2026 20:15:53] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 20:16:00,998 [INFO] Rota POST /pets/search acionada.
+2026-06-14 20:16:00,999 [INFO] Iniciando geração de embedding visual...
+2026-06-14 20:16:03,120 [INFO] Executando busca de similaridade via pgvector no Supabase...
+2026-06-14 20:16:03,902 [INFO] HTTP Request: POST https://ypqhiwzpahzbkfnkqhqj.supabase.co/rest/v1/rpc/match_pets "HTTP/2 200 OK"
+2026-06-14 20:16:03,905 [INFO] Busca finalizada. 0 correspondências encontradas.
+2026-06-14 20:16:03,905 [INFO] 127.0.0.1 - - [14/Jun/2026 20:16:03] "POST /api/pets/search HTTP/1.1" 200 -
+2026-06-14 20:16:05,822 [INFO] Rota GET /pets acionada para listar os pets recentes.
+2026-06-14 20:16:06,109 [INFO] HTTP Request: GET https://ypqhiwzpahzbkfnkqhqj.supabase.co/rest/v1/pets?select=id%2C%20species%2C%20breed%2C%20color%2C%20description%2C%20lastLocation%2C%20contactInfo%2C%20imageUrl%2C%20created_at&order=created_at.desc&limit=50 "HTTP/2 200 OK"
+2026-06-14 20:16:06,110 [INFO] Lista de pets recuperada com sucesso. Total: 0 pets.
+2026-06-14 20:16:06,111 [INFO] 127.0.0.1 - - [14/Jun/2026 20:16:06] "GET /api/pets HTTP/1.1" 200 -
+2026-06-14 20:16:10,137 [INFO] Rota POST /pets/analyze acionada.
+2026-06-14 20:16:10,138 [INFO] Fazendo chamada de análise visual do modelo Vision...
+2026-06-14 20:16:11,403 [ERROR] Falha de IA ao analisar imagem: Erro na requisição para análise visual de IA: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 55, in pet_vision_analysis
+    response.raise_for_status()
+  File "/Users/gb/Projects/achou-meu-pet-ai/.venv/lib/python3.12/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/routes/pets.py", line 126, in analyze
+    analysis = pet_vision_analysis(image_b64)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py", line 59, in pet_vision_analysis
+    raise ExternalServiceError(f"Erro na requisição para análise visual de IA: {str(re_err)}")
+errors.ExternalServiceError: Erro na requisição para análise visual de IA: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+2026-06-14 20:16:11,408 [ERROR] Exceção customizada interceptada globalmente [ExternalServiceError]: Erro na requisição para análise visual de IA: 404 Client Error: Not Found for url: https://openrouter.ai/api/v1/chat/completions
+2026-06-14 20:16:11,409 [INFO] 127.0.0.1 - - [14/Jun/2026 20:16:11] "[35m[1mPOST /api/pets/analyze HTTP/1.1[0m" 502 -
+2026-06-14 20:18:10,580 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
+2026-06-14 20:18:10,637 [INFO]  * Restarting with stat

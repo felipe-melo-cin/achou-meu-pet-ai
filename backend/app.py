@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 from werkzeug.exceptions import BadRequest
 import logging
 
+# Import das exceções customizadas do domínio
+from errors import PetAppError
+
 # Configura o formato do log (Data, Hora, Nível de erro, Mensagem)
 logging.basicConfig(
     level=logging.INFO,
@@ -22,17 +25,32 @@ BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
 FRONTEND    = os.path.join(BASE_DIR, '..', 'frontend')
 
 app = Flask(__name__, static_folder=FRONTEND)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+
+# ── Tratadores Globais de Erros ──────────────────────────────
+
+@app.errorhandler(PetAppError)
+def handle_pet_app_error(e):
+    """
+    Captura de forma unificada e limpa qualquer exceção originária do nosso domínio,
+    convertendo em respostas JSON limpas e status HTTP semanticamente corretos (502, 503, etc.).
+    """
+    logging.error(f"Exceção customizada interceptada globalmente [{e.__class__.__name__}]: {e.message}")
+    return jsonify({'error': e.message}), e.status_code
+
 
 @app.errorhandler(BadRequest)
 def handle_bad_request(e):
     return jsonify({'error': 'JSON malformado ou requisição inválida.'}), 400
 
+
 @app.errorhandler(Exception)
 def handle_unexpected_error(e):
-    # Aqui você loga o erro real internamente (veja passo abaixo)
-    # mas retorna uma mensagem genérica e segura para o usuário
+    # Log detalhado internamente para auditoria e depuração
+    logging.error(f"Exceção inesperada capturada no servidor: {str(e)}", exc_info=True)
     return jsonify({'error': 'Ocorreu um erro interno no servidor. Tente novamente mais tarde.'}), 500
+
 
 # ── Blueprints ──────────────────────────────────────────
 from routes.pets  import pets_bp
