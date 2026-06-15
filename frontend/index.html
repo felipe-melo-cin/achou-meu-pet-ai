@@ -855,7 +855,7 @@
        ========================================================= */
     function hydrateForm() {
       const ai = JSON.parse(sessionStorage.getItem('petAI') || '{}');
-      const map = { raca:'breed', porte:'size', cor:'primaryColor', cidade:'lastLocation', data:'data' };
+      const map = { raca:'Raça', porte:'Porte', cor:'Cor', cidade:'lastLocation', data:'data' };
       Object.entries(map).forEach(([id, key]) => {
         const val = ai[key] || ai[id];
         if (val) { const el = document.getElementById(id); if (el) el.value = val; }

@@ -1126,3 +1126,21 @@ errors.ExternalServiceError: Erro na requisição para análise visual de IA: 40
 2026-06-14 20:16:11,409 [INFO] 127.0.0.1 - - [14/Jun/2026 20:16:11] "[35m[1mPOST /api/pets/analyze HTTP/1.1[0m" 502 -
 2026-06-14 20:18:10,580 [INFO]  * Detected change in '/Users/gb/Projects/achou-meu-pet-ai/backend/services/ai_service.py', reloading
 2026-06-14 20:18:10,637 [INFO]  * Restarting with stat
+2026-06-14 21:39:11,112 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-14 21:39:11,112 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-14 21:39:11,112 [INFO]  * Restarting with stat
+2026-06-14 21:39:11,263 [WARNING]  * Debugger is active!
+2026-06-14 21:39:11,268 [INFO]  * Debugger PIN: 988-375-056
+2026-06-14 21:39:20,677 [INFO] 127.0.0.1 - - [14/Jun/2026 21:39:20] "GET / HTTP/1.1" 200 -
+2026-06-14 21:39:20,695 [INFO] 127.0.0.1 - - [14/Jun/2026 21:39:20] "[36mGET /hero-pets.png HTTP/1.1[0m" 304 -
+2026-06-14 21:39:20,695 [INFO] 127.0.0.1 - - [14/Jun/2026 21:39:20] "[36mGET /lupa.png HTTP/1.1[0m" 304 -
+2026-06-14 21:39:20,726 [INFO] 127.0.0.1 - - [14/Jun/2026 21:39:20] "[36mGET /paws-trail.png HTTP/1.1[0m" 304 -
+2026-06-14 21:39:25,226 [INFO] Rota POST /pets/analyze acionada.
+2026-06-14 21:39:25,226 [INFO] Fazendo chamada de análise visual do modelo Vision...
+2026-06-14 21:39:29,219 [INFO] Análise concluída com sucesso.
+2026-06-14 21:39:29,220 [INFO] 127.0.0.1 - - [14/Jun/2026 21:39:29] "POST /api/pets/analyze HTTP/1.1" 200 -
+2026-06-14 21:39:36,144 [INFO] Rota POST /pets/analyze acionada.
+2026-06-14 21:39:36,144 [INFO] Fazendo chamada de análise visual do modelo Vision...
+2026-06-14 21:39:40,677 [INFO] Análise concluída com sucesso.
+2026-06-14 21:39:40,678 [INFO] 127.0.0.1 - - [14/Jun/2026 21:39:40] "POST /api/pets/analyze HTTP/1.1" 200 -
