@@ -114,7 +114,7 @@ def generate_embedding(base64_image: str) -> list[float]:
         "X-Title": "Achou Meu Pet"
     }
 
-    api_url = "[https://openrouter.ai/api/v1/embeddings](https://openrouter.ai/api/v1/embeddings)"
+    api_url = "https://openrouter.ai/api/v1/embeddings"
 
     # Passamos o input de forma multimodal utilizando uma instrução genérica juntamente com a imagem do pet.
     payload = {
