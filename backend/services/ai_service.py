@@ -36,7 +36,7 @@ def pet_vision_analysis(base64_image: str) -> dict:
                     "type": "text",
                     "text": (
                         "Analize essa imagem de animal e retorne um JSON com: "
-                        "especie, raça, cor primária, porte do animal(pequeno, médio, grande). "
+                        "Raça, Cor, porte do animal(pequeno, médio, grande). "
                         "Retorne APENAS JSON VÁLIDOS, nada mais."
                     ),
                 },
