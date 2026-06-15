@@ -725,8 +725,17 @@
       return { path: path || 'home', params };
     }
 
+    // Variável para rastrear a última página visitada
+    let previousRoute = '';
+
     function navigate() {
       const { path, params } = parseHash();
+      
+      // 🚀 SE ELE VEIO DA HOME PARA O UPLOAD: Limpa o formulário para um novo fluxo limpo
+      if (previousRoute === 'home' && path === 'upload') {
+        resetFormulario();
+      }
+
       document.querySelectorAll('.page').forEach(p => {
         p.classList.toggle('active', p.dataset.route === path);
       });
@@ -735,6 +744,9 @@
       if (path === 'confirmacao')  hydrateForm();
       if (path === 'lista')        loadLista();
       if (path === 'home')         updateLoginBtn();
+      
+      // Salva a rota atual para a próxima mudança
+      previousRoute = path;
     }
 
     window.addEventListener('hashchange', navigate);
@@ -872,6 +884,9 @@
         fd.append('contato',   sw.classList.contains('on') ? 'sim' : '');
         if (selectedFile) fd.append('image', selectedFile);
         await apiPost('/pets/register', fd, true);
+
+        resetFormulario();
+
         location.hash = '#/sucesso';
       } catch (err) {
         alert('Erro ao cadastrar: ' + err.message);
@@ -1003,6 +1018,25 @@
       } finally {
         btn.disabled = false; btn.textContent = 'Criar conta';
       }
+    }
+
+    function resetFormulario() {
+      // 1. Reseta o arquivo selecionado e o visual do dropzone (usando a função que você já tem)
+      resetFile();
+      
+      // 2. Reseta todos os campos de texto e data do formulário
+      const form = document.getElementById('petForm');
+      if (form) form.reset();
+      
+      // 3. Reseta o botão switch (Deseja ser contatado?)
+      const sw = document.getElementById('contato');
+      if (sw) {
+        sw.classList.remove('on');
+        sw.setAttribute('aria-checked', 'false');
+      }
+      
+      // 4. Limpa os dados temporários que salvamos na sessão
+      sessionStorage.removeItem('petAI');
     }
 
     /* =========================================================

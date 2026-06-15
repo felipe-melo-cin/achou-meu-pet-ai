@@ -28,7 +28,7 @@ def pet_vision_analysis(base64_image: str) -> dict:
     # Restaurado o modelo solicitado. Removido 'response_format' para evitar erros 400/404 
     # de parâmetros não suportados por este modelo de OCR específico no OpenRouter.
     payload = {
-        "model": "baidu/qianfan-ocr-fast:free",
+        "model": "nex-agi/nex-n2-pro:free",
         "messages": [{
             "role": "user",
             "content": [
