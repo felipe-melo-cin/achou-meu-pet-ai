@@ -661,19 +661,23 @@
     /* =========================================================
        AUTH STATE
        ========================================================= */
-    const Auth = {
-      get token()  { return localStorage.getItem('access_token'); },
-      get nome()   { return localStorage.getItem('user_nome') || ''; },
-      isLoggedIn() { return !!this.token; },
-      save(d) {
-        localStorage.setItem('access_token', d.access_token);
-        localStorage.setItem('user_nome',    d.nome || '');
-        localStorage.setItem('user_id',      d.user_id || '');
-      },
-      clear() {
-        ['access_token','user_nome','user_id'].forEach(k => localStorage.removeItem(k));
-      }
-    };
+      const Auth = {
+        get token()  { return localStorage.getItem('access_token'); },
+        get nome()   { return localStorage.getItem('user_nome') || ''; },
+        isLoggedIn() { return !!this.token; },
+        save(d) {
+          localStorage.setItem('access_token', d.access_token);
+          
+          // Tenta pegar o nome de várias formas possíveis do Back-end / Supabase
+          const nomeDetectado = d.nome || d.name || d.user?.user_metadata?.nome || d.user?.user_metadata?.full_name || d.user?.nome || '';
+          
+          localStorage.setItem('user_nome',    nomeDetectado);
+          localStorage.setItem('user_id',      d.user_id || d.user?.id || '');
+        },
+        clear() {
+          ['access_token','user_nome','user_id'].forEach(k => localStorage.removeItem(k));
+        }
+      };
 
     function updateLoginBtn() {
       const btn = document.querySelector('.home-login');
@@ -955,6 +959,9 @@
       btn.disabled = true; btn.textContent = 'Entrando...'; status.textContent = '';
       try {
         const data = await apiPost('/auth/login', { email, senha });
+        
+        console.log("Resposta exata do seu servidor de login:", data);
+        
         Auth.save(data);
         updateLoginBtn();
         location.hash = '#/home';
