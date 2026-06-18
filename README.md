@@ -13,9 +13,11 @@ O **Achou Meu Pet AI?** é uma plataforma centralizada para auxiliar na localiza
 - [Fluxo de IA](#-fluxo-de-ia)
 - [Estrutura do Repositório](#-estrutura-do-repositório)
 - [Pré-requisitos](#-pré-requisitos)
+- [Configuração no Supabase](#-configuração-no-supabase)
 - [Instalação e Execução Local](#-instalação-e-execução-local)
 - [Endpoints da API](#-endpoints-da-api)
 - [Testes](#-testes)
+- [Deploy no Render](#-deploy-no-render)
 - [Equipe](#-equipe)
 - [Contribuindo](#-contribuindo)
 
@@ -34,28 +36,31 @@ Diferente de grupos em redes sociais onde anúncios se perdem no feed, o **Achou
 ## 🏛 Arquitetura
 
 O projeto utiliza uma arquitetura **Client-Server (MVC simplificado)**, com separação clara entre frontend e backend:
-
 ```
 ┌─────────────────────────────────────────────────────────────────┐
+──────┐
 │                         CLIENTE (Browser)                       │
 │              HTML + CSS + JavaScript Vanilla (SPA)              │
 │     index.html · partials.js · styles.css · (Mock API → Real)   │
 └──────────────────────┬──────────────────────────────────────────┘
-                       │  HTTP (fetch / form-data)
-                       ▼
+──────┘
+│  HTTP (fetch / form-data)
+▼
 ┌─────────────────────────────────────────────────────────────────┐
+──────┐
 │                   BACKEND — Flask (Python)                      │
 │                                                                 │
 │   app.py  ──► Blueprint /api/auth  ──► services/supabase.py     │
 │           └──► Blueprint /api/pets  ──► services/ai_service.py  │
 │                                    └──► services/supabase.py    │
 └──────────────────────┬─────────────────────────┬───────────────┘
-                       │                         │
-           ┌───────────▼───────────┐  ┌──────────▼──────────────┐
-           │   Supabase (BaaS)     │  │   OpenRouter (AI API)   │
-           │  Auth · PostgreSQL    │  │  Vision Model (QianFan) │
-           │  pgvector · Storage   │  │  Embedding (text-3-sm)  │
-           └───────────────────────┘  └─────────────────────────┘
+─────┘
+│ │
+┌───────────▼───────────┐  ┌──────────▼──────────────┐
+│   Supabase (BaaS)     │  │   OpenRouter (AI API)   │
+│  Auth · PostgreSQL    │  │  Vision Model (QianFan) │
+│  pgvector · Storage   │  │  Embedding (text-3-sm)  │
+└───────────────────────┘  └─────────────────────────┘
 ```
 
 ### Camadas da Arquitetura
@@ -82,25 +87,24 @@ A separação entre frontend e backend permite que o cliente seja hospedado em q
 ---
 
 ## 🚀 Fluxo de IA
-
 ```
 Foto do pet (base64)
-       │
-       ▼
+│
+▼
 ┌─────────────────────┐
-│  Vision Analysis    │  ← Modelo multimodal (QianFan / OpenRouter)
+│  Vision Analysis    │  ← Modelo multimodal (nex-n2-pro / OpenRouter)
 │  (pet_vision_       │    Retorna JSON: { species, breed,
 │   analysis)         │      primaryColor, distinguishingMarks }
 └────────┬────────────┘
-         │  texto concatenado
-         ▼
+│  texto concatenado
+▼
 ┌─────────────────────┐
-│  Embedding          │  ← text-embedding-3-small (OpenAI via OpenRouter)
-│  (generate_         │    Retorna vetor float[] de 1536 dimensões
+│  Embedding          │  ← nvidia/llama-nemotron-embed-vl-1b-v2:free
+│  (generate_         │    Retorna vetor float[] de 1024 dimensões
 │   embedding)        │
 └────────┬────────────┘
-         │  vetor
-         ▼
+│  vetor
+▼
 ┌─────────────────────┐
 │  pgvector (RPC      │  ← match_pets() — Similaridade por Cosseno
 │  match_pets)        │    Filtra threshold ≥ 0.5 (busca) / 0.7 (UI)
@@ -117,24 +121,24 @@ achou-meu-pet-ai/
 │   ├── app.py                  # Entry point Flask, blueprints, rota /api/health
 │   ├── requirements.txt        # Dependências Python
 │   ├── .env.example            # Template de variáveis de ambiente
-│   │
+│   
 │   ├── routes/
-│   │   ├── __init__.py
+│   │   ├── init.py
 │   │   ├── auth.py             # POST /api/auth/register, POST /api/auth/login
 │   │   └── pets.py             # GET /api/pets, POST /api/pets/search,
 │   │                           # POST /api/pets/register, POST /api/pets/analyze
 │   └── services/
-│       ├── __init__.py
+│       ├── init.py
 │       ├── ai_service.py       # pet_vision_analysis(), generate_embedding()
 │       └── supabase_service.py # upload_image(), register_pet(), list_pets(),
 │                               # search_similar_pets(), register_user(), login_user()
 │
 └── frontend/
-    ├── index.html              # SPA principal (todas as telas em uma página)
-    ├── css/
-    │   └── styles.css          # Estilos globais
-    └── js/
-        └── partials.js         # Navbar, footer, SVGs e Mock API
+├── index.html              # SPA principal (todas as telas em uma página)
+├── css/
+│   └── styles.css          # Estilos globais
+└── js/
+└── partials.js         # Navbar, footer, SVGs e Mock API
 ```
 
 ---
@@ -146,54 +150,91 @@ achou-meu-pet-ai/
 - Conta no **Supabase** (gratuita) com:
   - Extensão `pgvector` habilitada
   - Tabela `pets` com colunas: `id, species, breed, color, description, lastLocation, contactInfo, imageUrl, embedding (vector), created_at`
-  - Função RPC `match_pets` criada (ver abaixo)
+  - Função RPC `match_pets` criada (ver seção de Configuração no Supabase)
   - Bucket de storage `pet_images` (público)
 - Chave de API do **OpenRouter** (gratuita para modelos free)
 
-### SQL para configurar o Supabase
+---
+
+## 🛠 Configuração no Supabase
+
+Para que o backend funcione perfeitamente, você precisará configurar 4 pilares no seu painel do Supabase:
+
+### 1. Habilitar a Extensão de Vetores
+
+No SQL Editor do Supabase, execute o comando abaixo para habilitar a extensão responsável por buscas vetoriais:
 
 ```sql
--- Habilitar extensão vetorial
 create extension if not exists vector;
+```
 
--- Tabela de pets
+### 2. Criar a Tabela `pets`
+
+A tabela precisa acomodar os metadados do pet e a coluna de embedding para armazenar o vetor gerado pelo modelo da NVIDIA. O modelo `llama-nemotron-embed-vl-1b-v2` gera vetores de **1024 dimensões**:
+
+```sql
 create table pets (
-  id           uuid primary key default gen_random_uuid(),
-  species      text,
-  breed        text,
-  color        text,
-  description  text,
-  "lastLocation" text,
-  "contactInfo"  text,
-  "imageUrl"     text,
-  embedding    vector(1536),
-  created_at   timestamptz default now()
+  id uuid default gen_random_uuid() primary key,
+  species text default 'Desconhecido',
+  breed text,
+  color text,
+  description text,
+  "lastLocation" text not null,
+  "contactInfo" text,
+  "imageUrl" text,
+  embedding vector(1024),
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+```
 
--- Função de busca por similaridade
-create or replace function match_pets(
-  query_embedding vector(1536),
+### 3. Criar a Função RPC `match_pets`
+
+O backend executa uma chamada RPC para calcular a distância de cosseno entre vetores. Execute o script abaixo no Supabase SQL Editor:
+
+```sql
+create or replace function match_pets (
+  query_embedding vector(1024),
   match_threshold float,
-  match_count     int
+  match_count int
 )
 returns table (
-  id text, species text, breed text, color text,
-  description text, "lastLocation" text, "contactInfo" text,
-  "imageUrl" text, similarity float, created_at timestamptz
+  id uuid,
+  species text,
+  breed text,
+  color text,
+  description text,
+  "lastLocation" text,
+  "contactInfo" text,
+  "imageUrl" text,
+  created_at timestamp with time zone
 )
-language sql stable
-as $$
+language plpgsql as $$
+begin
+  return query
   select
-    id::text, species, breed, color, description,
-    "lastLocation", "contactInfo", "imageUrl",
-    1 - (embedding <=> query_embedding) as similarity,
-    created_at
+    pets.id,
+    pets.species,
+    pets.breed,
+    pets.color,
+    pets.description,
+    pets."lastLocation",
+    pets."contactInfo",
+    pets."imageUrl",
+    pets.created_at
   from pets
-  where 1 - (embedding <=> query_embedding) > match_threshold
-  order by embedding <=> query_embedding
+  where 1 - (pets.embedding <=> query_embedding) > match_threshold
+  order by pets.embedding <=> query_embedding asc
   limit match_count;
+end;
 $$;
 ```
+
+### 4. Criar o Bucket de Storage `pet_images`
+
+1. Acesse **Storage** no menu lateral do Supabase.
+2. Crie um novo bucket chamado **`pet_images`**.
+3. Altere a visibilidade do bucket para **Public** (para que as URLs públicas funcionem sem restrições de assinatura).
+4. Adicione políticas de segurança (RLS) que permitam inserção de arquivos de forma anônima ou autenticada conforme sua regra de negócio.
 
 ---
 
@@ -369,14 +410,75 @@ pytest tests/ --cov=. --cov-report=term-missing
 ```
 
 Saída esperada ao rodar tudo:
-
-```
+```bash
 tests/test_ai_service.py::TestPetVisionAnalysis::test_retorna_dict_com_campos_esperados PASSED
+
 tests/test_ai_service.py::TestPetVisionAnalysis::test_limpa_markdown_do_json PASSED
+
 tests/test_ai_service.py::TestPetVisionAnalysis::test_levanta_erro_quando_conteudo_vazio PASSED
+
 ...
+
 ====== 16 passed in 1.23s ======
 ```
+
+---
+
+## 🚀 Deploy no Render
+
+O Render é ideal para hospedar essa aplicação Flask de forma rápida e gratuita. Siga o passo a passo abaixo:
+
+### Passo 1: Preparar o Repositório
+
+Certifique-se de incluir um arquivo `requirements.txt` na raiz do projeto contendo todas as dependências:
+
+```
+Flask==3.1.0
+flask-cors==5.0.0
+python-dotenv==1.0.1
+supabase==2.10.0
+openai==1.51.0
+gunicorn==21.2.0
+```
+
+### Passo 2: Criar um Web Service no Render
+
+1. Acesse o dashboard do [Render](https://render.com) e clique em **New +** > **Web Service**.
+2. Conecte o repositório do GitHub onde o código do projeto está hospedado.
+3. Defina as configurações básicas do ambiente:
+   - **Language:** `Python`
+   - **Region:** Escolha a mais próxima do seu banco Supabase (geralmente _Ohio (us-east-2)_ ou _Frankfurt (eu-central-1)_).
+   - **Branch:** `main` (ou a branch de produção de sua preferência).
+
+### Passo 3: Comandos de Inicialização
+
+Preencha os campos de compilação da seguinte forma:
+
+- **Build Command:**
+```bash
+  pip install -r requirements.txt
+```
+
+- **Start Command:** (Usando gunicorn para produção em vez do servidor de desenvolvimento do Flask)
+```bash
+  gunicorn app:app
+```
+
+### Passo 4: Variáveis de Ambiente
+
+No menu lateral da configuração do serviço no Render, clique em **Environment** e adicione as seguintes chaves:
+
+| Chave | Descrição / Valor |
+|---|---|
+| `SUPABASE_URL` | URL do seu projeto Supabase (encontrada em Project Settings > API) |
+| `SUPABASE_ANON_KEY` | Chave pública anônima do seu projeto Supabase |
+| `OPENROUTER_API_KEY` | Sua chave de API gerada no painel do OpenRouter |
+
+> ⚠️ **Nota:** A aplicação automaticamente ouvirá na porta fornecida de forma dinâmica pelo Render através da variável de ambiente `$PORT`, o que faz o `gunicorn` se adaptar nativamente sem precisar fixar a porta `5000` em produção.
+
+### Passo 5: Deploy Automático
+
+Após salvar as configurações, o Render iniciará automaticamente o deploy. Você pode acompanhar o progresso na aba **Logs**. Uma vez concluído, sua aplicação estará disponível em um URL público (ex: `https://achou-meu-pet-ai.onrender.com`).
 
 ---
 
